@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.conf import settings
 from django.utils.text import slugify
 import uuid
+import os
 
 class Post(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -21,18 +22,18 @@ def __str__(self):
 def amount_comments(self):
     return self.comments.count()
 
+# blog/apps/post/models.py
 def save(self, *args, **kwargs):
     if not self.slug:
         self.slug = self.generate_unique_slug()
     super().save(*args, **kwargs)
-    # TODO: Definir imagenes portada
+    if not self.images.exists():
+        PostImage.objects.create(post=self, image='post/default/post_default.png')
 
 def generate_unique_slug(self):
     # tenemos este titulo para el post
-    # tenemos-este-titulo-para-el-postCLASE23.md 2024-09-24
     # tenemos-este-titulo-para-el-post-1
-    # tenemos-este-titulo-para-el-post-2
-    # tenemos-este-titulo-para-el-post-3
+
     slug = slugify(self.title)
     unique_slug = slug
     num = 1
@@ -53,3 +54,20 @@ class Comment(models.Model):
 
 def __str__(self):
     return self.content
+
+def get_image_filename(instance, filename):
+    post_id = instance.post.id
+    images_count = instance.post.images.count()
+    base_filename, file_extension = os.path.splitext(filename) # esto se llama unpacking (desempaquetado)
+    new_filename = f"post_{post_id}_cover_{images_count + 1}{file_extension}"
+    return os.path.join('post/cover/', new_filename)
+
+class PostImage(models.Model):
+    post = models.ForeignKey(
+        Post, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to=get_image_filename,
+default='post/default/post_default.png')
+    active = models.BooleanField(default=True)
+
+def __str__(self):
+    return f"PostImage {self.id}"

@@ -29,19 +29,18 @@ def create_groups_and_permissions(sender, instance, created, **kwargs):
             codename="change_comment", content_type=comment_content_type)
             delete_comment_permission = Permission.objects.get(
             codename="delete_comment", content_type=comment_content_type)
+
             # CREAR GRUPO USUARIOS REGISTRADOS
             registered_group, created = Group.objects.get_or_create(
             name='Registered')
             registered_group.permissions.add(
             view_post_permission,
-            add_post_permission,
-            change_post_permission,
-            delete_post_permission,
             view_comment_permission,
             add_comment_permission,
             change_comment_permission,
             delete_comment_permission,
             )
+
             # CREAR GRUPO USUARIOS COLABORADORES
             registered_group, created = Group.objects.get_or_create(
             name='Collaborators')
@@ -55,6 +54,14 @@ def create_groups_and_permissions(sender, instance, created, **kwargs):
             change_comment_permission,
             delete_comment_permission,
             )
+
+            # CREAR GRUPO USUARIOS REGISTRADOS
+            registered_group, created = Group.objects.get_or_create(
+            name='Visitor')
+            registered_group.permissions.add(
+            view_post_permission,
+            )
+
             # CREAR GRUPO USUARIOS ADMINISTRADORES(HEAVY)
             registered_group, created = Group.objects.get_or_create(
             name='Admins')

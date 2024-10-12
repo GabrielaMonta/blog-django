@@ -3,12 +3,9 @@ from apps.post.models import Post, Category, PostImage, Comment
 
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'category',
-    'creation_date', 'modification_date', 'allow_comments') #
-    Campos a mostrar en la lista
-    search_fields = ('title', 'content', 'author__username', 'id') # Campos de
-    búsqueda
-    prepopulated_fields = {'slug': ('title',)} # Autocompletar slug a partir del
-    título
+    'creation_date', 'modification_date', 'allow_comments') #Campos a mostrar en la lista
+    search_fields = ('title', 'content', 'author__username', 'id') # Campos de búsqueda
+    prepopulated_fields = {'slug': ('title',)} # Autocompletar slug a partir del título
     list_filter = ('category', 'author', 'creation_date', 'allow_comments')
     ordering = ('-creation_date',) # Ordenar por fecha de creación descendente
 

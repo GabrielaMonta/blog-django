@@ -55,13 +55,6 @@ def create_groups_and_permissions(sender, instance, created, **kwargs):
             delete_comment_permission,
             )
 
-            # CREAR GRUPO USUARIOS REGISTRADOS
-            registered_group, created = Group.objects.get_or_create(
-            name='Visitor')
-            registered_group.permissions.add(
-            view_post_permission,
-            )
-
             # CREAR GRUPO USUARIOS ADMINISTRADORES(HEAVY)
             registered_group, created = Group.objects.get_or_create(
             name='Admins')

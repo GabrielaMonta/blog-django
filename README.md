@@ -1,9 +1,14 @@
 # Proyecto desarrollado en python
 ## Descripcion
-Comprende un blog orientado a ...
+Este proyecto es un blog dedicado a la promoción y difusión de eventos provinciales en el Chaco, Argentina. Su objetivo principal es servir como una plataforma informativa y accesible donde los usuarios pueden descubrir, compartir y participar en diversas actividades culturales, recreativas y educativas que se llevan a cabo en la provincia.
+
+## Objetivo
+El blog busca promover la cultura y las actividades sociales en el Chaco, incentivando la participación de la comunidad en eventos que enriquecen la vida provincial. Al ser una plataforma accesible y fácil de usar, pretende conectar a los ciudadanos con las iniciativas locales, fomentar el turismo interno y fortalecer el tejido social de la región.
 
 ## Estructura del proyecto
-'''
+ESTRUCTURA DEL PROYECTO
+
+```
 ├── entorno/						<--- Carpeta del entorno
 │ ├── Scripts/
 │ │ ├── activate.bat
@@ -104,4 +109,5 @@ Comprende un blog orientado a ...
 │ ├── requeriments.txt		    <--- Archivo requeriments.txt - Enlista los paquetes
 | └── ...
 └── ...
-'''
+```
+

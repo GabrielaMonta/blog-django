@@ -5,9 +5,6 @@ from django.urls import reverse
 from django.conf import settings 
 
 
-class PostDetailView(TemplateView):
-    template_name = 'post/post_detail.html'
-
 
 class PostUpdateView(TemplateView):
     template_name = 'post/post_update.html'

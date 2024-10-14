@@ -14,7 +14,12 @@
 
 {% block content_layout %}
     {% include 'components/commons/header.html' %}
-	<main>
-        {% block content %}{% endblock %}
+    <main class="flex justify-center min-h-[calc(100vh-125px)] overflow-x-hidden">
+        <article class="grid">
+            {% include 'components/commons/searchBar.html' %}
+            <section class="container mx-auto">
+                {% block content %}{% endblock %}
+            </section>
+        </article>
     </main>
 {% endblock %}

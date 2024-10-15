@@ -1,4 +1,20 @@
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
+
+
+# from apps.post.models import Post
+
+
+# class PostListView(ListView):
+# model = Post
+# template_name = 'post/post_list.html'
+# context_object_name = 'posts'
+
+class PostListView(TemplateView):
+    template_name = 'post/post_list.html'
+
+
+class PostCreateView(TemplateView):
+    template_name = 'post/post_create.html'
 
 
 class PostListView(TemplateView):

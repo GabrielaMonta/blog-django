@@ -1,0 +1,28 @@
+{% extends 'layouts/main_layout.html' %}
+{% block title_layout %}
+	{% block title %}
+		FeCH | Pagina
+	{% endblock %}
+{% endblock %}
+
+{% block extra_head_layout %}
+	{% block extra_head %}
+		
+	{% endblock %}
+{% endblock %}
+
+{% block content_layout %}
+    {% include 'components/commons/header.html' %}
+    {% include 'components/commons/home.html' %}
+    {% include 'components/ui/blockDecoration.html' %}
+    <main class="flex justify-center min-h-[calc(100vh-125px)] overflow-x-hidden">
+        <article class="grid">
+            <section class="container mx-auto">
+                {% block content %}{% endblock %}
+            </section>
+        </article>
+    </main>
+    {% include 'components/commons/footer.html' %}
+{% endblock %}
+
+

@@ -1,0 +1,31 @@
+{% extends 'layouts/main_layout.html' %}
+
+{% block title_layout %}
+	{% block title %}
+		FeCH | Pagina
+	{% endblock %}
+{% endblock %}
+
+{% block extra_head_layout %}
+	{% block extra_head %}
+		
+	{% endblock %}
+{% endblock %}
+
+{% block content_layout %}
+    <div class="grid grid-rows-[96px_1fr_56px] min-h-screen">
+        {% include 'components/commons/header.html' %}
+
+        <main class="flex justify-center">
+            <article class="grid lg:gap-8 sm:gap-2 my-4">
+                <div class="h-[150px] my-4">
+                    {% include 'components/commons/searchBar.html' %}
+                </div>
+                <section class="container mx-auto mb-8 sm:mb-4">
+                    {% block content %}{% endblock %}
+                </section>
+            </article>
+        </main>
+        {% include 'components/commons/footer.html' %}
+    </div>
+{% endblock %}

@@ -7,3 +7,5 @@ migrations
 /blog/static/media/*
 venv/
 .venv
+/blog/media/**/avatar
+/blog/media/**/cover

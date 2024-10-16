@@ -39,6 +39,32 @@
                 {% include 'components/ui/button.html' %}
             </div>
         </li>
+
+
+        <!-- Agregue esto como prueba para ver si funcionaba nms, hay que corregir -->
+{#        {% if user.is_authenticated %}#}
+{#            <!-- Mostrar opciones si el usuario está autenticado -->#}
+{#            <li>#}
+{#                <a href="{% url 'user:user_profile' %}">Perfil</a></li>#}
+{#            <li>#}
+{#                <form method="POST" action="{% url 'user:auth_logout' %}">#}
+{#                    {% csrf_token %}#}
+{#                    <button type="submit">Cerrar sesión</button>#}
+{#                </form>#}
+{#            </li>#}
+{#        {% else %}#}
+{#            <!-- Mostrar opciones si el usuario NO está autenticado -->#}
+{#            <li><a href="{% url 'user:auth_login' %}">Iniciar sesión</a></li>#}
+{#            <li><a href="{% url 'user:auth_register' %}">Registrarse</a></li>#}
+{#        {% endif %}#}
+{##}
+{##}
+{#        #}
+{#        <li>#}
+{#            {% include 'components/ui/buttonLogin.html' %}#}
+{#        </li>#}
+{#        #}
+
     </ul>
 </nav>
 

@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'apps.user',
 ]
 
+AUTH_USER_MODEL = 'user.User'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -117,3 +119,5 @@ MEDIA_ROOT = [os.path.join(BASE_DIR, 'static/media')]
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DEFAULT_POST_IMAGE = 'post/default/post_default.png'

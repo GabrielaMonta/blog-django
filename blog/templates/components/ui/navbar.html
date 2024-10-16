@@ -1,41 +1,102 @@
+{#<nav>#}
+{#    <ul class="flex lg:gap-8 sm:gap-4 text-center justify-center items-center text-md font-martian sm:text-sm">#}
+{#        <li>#}
+{#            <a href="{% url 'home' %}">Sobre Fetch</a>#}
+{#        </li>#}
+{#        <li>#}
+{#            <a href="{% url 'post:post_detail' slug='festivales-de-chaco' %}">Eventos</a>#}
+{#        </li>#}
+{#        <li>#}
+{#            <a href="{% url 'post:post_detail' slug='festivales-de-chaco' %}">Contactos</a>#}
+{#        </li>#}
+{##}
+{#                <li>#}
+{#                    <a href="{% url 'user:user_profile' %}">Perfil</a>#}
+{#                </li>#}
+{#        <li>#}
+{#            {% include 'components/ui/buttonLogin.html' %}#}
+{#        </li>#}
+{##}
+{#    </ul>#}
+{#</nav>#}
 <nav>
-    <ul class="flex gap-8 text-center justify-center items-center text-md font-martian">
+    <ul class="flex lg:gap-8 gap-4 text-center justify-center items-center text-md font-martian sm:text-sm">
         <li>
-            <a href="{% url 'home' %}">Inicio</a>
+            <a href="{% url 'home' %}" class="text-white hover:text-gray-300">Sobre Fetch</a>
         </li>
         <li>
-            <a href="{% url 'home' %}">Sobre Fetch</a>
+            <a href="{% url 'post:post_detail' slug='festivales-de-chaco' %}" class="text-white hover:text-gray-300">Eventos</a>
         </li>
         <li>
-            <a href="{% url 'post:post_detail' slug='festivales-de-chaco' %}">Eventos</a>
+            <a href="{% url 'post:post_detail' slug='festivales-de-chaco' %}" class="text-white hover:text-gray-300">Contactos</a>
         </li>
-        <li>
-            <a href="{% url 'post:post_detail' slug='festivales-de-chaco' %}">Contactos</a>
+
+         <li class="flex items-center button-container">
+            <div class="hidden md:block"> 
+                {% include 'components/ui/buttonLogin.html' %}
+            </div>
+            <div class="block md:hidden"> 
+                {% include 'components/ui/button.html' %}
+            </div>
         </li>
 
 
         <!-- Agregue esto como prueba para ver si funcionaba nms, hay que corregir -->
-        {% if user.is_authenticated %}
-            <!-- Mostrar opciones si el usuario está autenticado -->
-            <li>
-                <a href="{% url 'user:user_profile' %}">Perfil</a></li>
-            <li>
-                <form method="POST" action="{% url 'user:auth_logout' %}">
-                    {% csrf_token %}
-                    <button type="submit">Cerrar sesión</button>
-                </form>
-            </li>
-        {% else %}
-            <!-- Mostrar opciones si el usuario NO está autenticado -->
-            <li><a href="{% url 'user:auth_login' %}">Iniciar sesión</a></li>
-            <li><a href="{% url 'user:auth_register' %}">Registrarse</a></li>
-        {% endif %}
+{#        {% if user.is_authenticated %}#}
+{#            <!-- Mostrar opciones si el usuario está autenticado -->#}
+{#            <li>#}
+{#                <a href="{% url 'user:user_profile' %}">Perfil</a></li>#}
+{#            <li>#}
+{#                <form method="POST" action="{% url 'user:auth_logout' %}">#}
+{#                    {% csrf_token %}#}
+{#                    <button type="submit">Cerrar sesión</button>#}
+{#                </form>#}
+{#            </li>#}
+{#        {% else %}#}
+{#            <!-- Mostrar opciones si el usuario NO está autenticado -->#}
+{#            <li><a href="{% url 'user:auth_login' %}">Iniciar sesión</a></li>#}
+{#            <li><a href="{% url 'user:auth_register' %}">Registrarse</a></li>#}
+{#        {% endif %}#}
+{##}
+{##}
+{#        #}
+{#        <li>#}
+{#            {% include 'components/ui/buttonLogin.html' %}#}
+{#        </li>#}
+{#        #}
 
-
-        
-        <li>
-            {% include 'components/ui/buttonLogin.html' %}
-        </li>
-        
     </ul>
 </nav>
+
+
+
+{##}
+{#        <!-- Agregue esto como prueba para ver si funcionaba nms, hay que corregir -->#}
+{#        {% if user.is_authenticated %}#}
+{#            <!-- Mostrar opciones si el usuario está autenticado -->#}
+{#            <li>#}
+{#                <a href="{% url 'user:user_profile' %}">Perfil</a></li>#}
+{#            <li>#}
+{#                <form method="POST" action="{% url 'user:auth_logout' %}">#}
+{#                    {% csrf_token %}#}
+{#                    <button type="submit">Cerrar sesión</button>#}
+{#                </form>#}
+{#            </li>#}
+{#        {% else %}#}
+{#            <!-- Mostrar opciones si el usuario NO está autenticado -->#}
+{#            <li><a href="{% url 'user:auth_login' %}">Iniciar sesión</a></li>#}
+{#            <li><a href="{% url 'user:auth_register' %}">Registrarse</a></li>#}
+{#        {% endif %}#}
+{##}
+{##}
+{#        #}
+{#        <li>#}
+{#            {% include 'components/ui/buttonLogin.html' %}#}
+{#        </li>#}
+{##}
+{#    </ul>#}
+{#</nav>#}
+
+ 
+
+

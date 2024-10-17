@@ -1,8 +1,11 @@
+import os
+
 from django.db import models
 from django.utils import timezone
 from django.conf import settings
 from django.utils.text import slugify
 import uuid
+
 
 class Post(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -20,7 +23,6 @@ class Post(models.Model):
     modification_date = models.DateTimeField(auto_now=True)
     allow_comments = models.BooleanField(default=True)
     category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='posts')
-    
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -75,7 +77,8 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.content
-    
+
+
 class Category(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=100, unique=True)
@@ -85,12 +88,14 @@ class Category(models.Model):
     def __str__(self):
         return self.title
 
+
 def get_image_filename(instance, filename):
-        post_id = instance.post.id
-        images_count = instance.post.images.count()
-        base_filename, file_extension = os.path.splitext(filename) # esto se llama unpacking (desempaquetado)
-        new_filename = f"post_{post_id}_cover_{images_count + 1}{file_extension}"
-        return os.path.join('post/cover/', new_filename)
+    post_id = instance.post.id
+    images_count = instance.post.images.count()
+    base_filename, file_extension = os.path.splitext(filename)  # esto se llama unpacking (desempaquetado)
+    new_filename = f"post_{post_id}_cover_{images_count + 1}{file_extension}"
+    return os.path.join('post/cover/', new_filename)
+
 
 class PostImage(models.Model):
     post = models.ForeignKey(
@@ -100,7 +105,8 @@ class PostImage(models.Model):
 
     def __str__(self):
         return f"PostImage {self.id}"
-    
+
+
 def save(self, *args, **kwargs):
     if not self.slug:
         self.slug = self.generate_unique_slug()
@@ -108,4 +114,4 @@ def save(self, *args, **kwargs):
 
     if not self.images.exists():
         PostImage.objects.create(post=self,
-image='post/default/post_default.png')
+                                 image='post/default/post_default.png')

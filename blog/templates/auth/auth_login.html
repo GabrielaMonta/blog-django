@@ -1,17 +1,27 @@
 {% extends 'layouts/auth_layout.html' %}
+{% load static %}
 
-{% block title %}Iniciar sesión desde la rama template_login 2| BLOG FeCH{% endblock title %}
+{% block title %}
+	Iniciar sesion | FeCH
+{% endblock %}
 
-{% block content %}
+{% block title_form %}
+    Iniciar sesion
+{% endblock title_form %}
 
-<div class="flex flex-col justify-center items-center">
-    <h1 class="text-center text-2xl mb-6">Iniciar sesión</h1>
-    <form class="flex flex-col max-w-[400px] gap-4" method="post">
-        {% csrf_token %} {{ form.as_p }}
-        <button type="submit" class="w-full bg-blue-400 py-2 rounded-lg">
-            Iniciar sesión
-        </button>
-    </form>
-</div>
+{% block url_img %}
+    <img src={% static 'media/user/auth_login.png' %} alt="Imagen de ejemplo" class="object-cover rounded-t-lg md:rounded-l-lg h-full w-full " />
+{% endblock url_img%}
 
-{% endblock content %}
+
+{% block extra_field %}
+    <a href="/" class="text-sm underline">Recuperar contraseña</a>
+{% endblock extra_field %}
+
+{% block name_button %}
+    Ingresar
+{% endblock name_button %}
+
+{% block name_a %}
+    <a href="/" class="text-sm font-onest mt-8">¿Todavia no tienes cuenta? <span class="font-semibold underline">Registrate</span></a>
+{% endblock name_a %}

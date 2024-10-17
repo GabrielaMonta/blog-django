@@ -16,14 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
-from blog.views import IndexView
+from blog.views import IndexView, AuthLoginView, AuthRegisterView
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name='home'),
     path('posts/', include('apps.post.urls', namespace='post')),
-    path('', include('apps.user.urls'))
+    path('', include('apps.user.urls')),
+    path('auth/login', AuthLoginView.as_view(), name='auth_login'),
+    path('auth/register', AuthRegisterView.as_view(), name='auth_register')
 
 ]
 

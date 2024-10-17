@@ -1,15 +1,30 @@
 {% extends 'layouts/auth_layout.html' %}
+{% load static %}
 
-{% block title %}Registrarse | BLOG FeCH{% endblock title %}
+{% block title %}
+	Registrarse | FeCH
+{% endblock %}
 
-{% block content %}
-<div class="flex flex-col justify-center items-center">
-    <h1 class="text-center text-2xl mb-6">Registrarse</h1>
-    <form class="flex flex-col max-w-[400px] gap-4" method="post" enctype="multipart/form-data">
-        {% csrf_token %} {{ form.as_p }}
-        <button type="submit" class="w-full bg-green-400 py-2 rounded-lg">
-            Registrarse
-        </button>
-    </form>
-</div>
-{% endblock content %}
+{% block title_form %}
+    Registrarse
+{% endblock title_form %}
+
+{% block url_img %}
+    <img src={% static 'media/user/auth_register.jpeg' %} alt="Imagen de ejemplo" class="object-cover rounded-t-lg md:rounded-l-lg h-full w-full " />
+{% endblock url_img%}
+
+{% block extra_field %}
+    <div class="mb-4">
+        <label for="password" class="block text-md font-medium text-white">Repetir contraseña</label>
+        <input type="password" id="password" name="password" required class="mt-1 block w-full p-2 border border-gray-300 rounded-md" />
+    </div>
+{% endblock extra_field %}
+
+{% block name_button %}
+    Registrarse
+{% endblock name_button %}
+
+{% block name_a %}
+    <a href="/" class="text-sm font-onest mt-8">¿Ya tienes una cuenta? <span class="font-semibold underline">Inicia sesion </span></a>
+{% endblock name_a %}
+

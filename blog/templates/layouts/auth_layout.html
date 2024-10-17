@@ -1,16 +1,37 @@
-{% extends 'layouts/base_layout.html' %}
+{% extends 'layouts/main_layout.html' %}
 
 {% block title_layout %}
-    {% block title %}FeCH | BLOG{% endblock title %}
-{% endblock title_layout %}
-{% block extra_head_layout %}
-    {% block extra_head %}{% endblock extra_head %}
-{% endblock extra_head_layout %}
+	{% block title %}
+		FeCH | Auth
+	{% endblock %}
+{% endblock %}
+
 
 {% block content_layout %}
-<main class="flex justify-center min-h-[100dvh] bg-purple-200">
-    <div class="container mx-4 md:mx-8 lg:mx-40 py-10 bg-pink-100">
-        {% block content %}{% endblock content %}
-    </div>
-</main>
+    <main class="flex items-center justify-center min-h-screen {{ color_bg }} sm:p-4">
+		 <div class="container mx-auto w-full max-w-[1000px] h-auto {{ color_bg_form }} shadow-lg rounded-lg flex flex-col md:flex-row">
+            <div class="w-full md:w-1/2 flex items-center justify-center ">
+                {% block url_img %} {% endblock url_img%}
+            </div>
+
+            <div class="w-full md:w-1/2 flex flex-col items-center justify-center p-8 text-white">
+                <h1 class="text-5xl font-slackey font-bold mb-4 ">{% block title_form %} {% endblock title_form %}</h1>
+                <form class="w-full font-onest  mt-8 gap-4" method="POST"> {% csrf_token %}
+                    <div class="mb-4">
+                        <label for="nombre" class="block text-md font-medium text-white">Usuario</label>
+                        <input type="text" id="nombre" name="nombre" required class="mt-1 block w-full p-2 border border-gray-300 rounded-md" />
+                    </div>
+                    <div class="mb-4">
+                        <label for="password" class="block text-md font-medium text-white">Contraseña</label>
+                        <input type="password" id="password" name="password" required class="mt-1 block w-full p-2 border border-gray-300 rounded-md" />
+                    </div>
+                    {% block extra_field %} {% endblock extra_field %}
+                    <div class="flex justify-end mt-4">
+                        <button type="submit" class="py-2.5 px-5 me-2 mb-2 text-lg font-onest font-medium text-white focus:outline-none bg-[#03346E] rounded-full border border-gray-200 hover:bg-[#03346E]  focus:z-10 focus:ring-4 focus:ring-[#03346E] dark:focus:ring-[#03346E] dark:bg-[#03346E]  dark:border-slate-600 dark:hover:text-white dark:hover:bg-blue-700">{% block name_button %} {% endblock name_button %}</button>
+                    </div>
+                </form>
+                {% block name_a %} {% endblock name_a %}
+            </div>
+        </div>
+    </main>
 {% endblock content_layout %}

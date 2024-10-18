@@ -1,0 +1,37 @@
+{% extends 'layouts/main_layout.html' %}
+{% block title %}
+	FeCH | Acerca de
+{% endblock %}
+
+{% block content_layout %}
+    {% include 'components/commons/header.html' %}
+    <main class="flex justify-center min-h-[calc(100vh-152px)] m-4 sm:grid">
+        <article class="grid">
+            <section class="container mx-auto">
+                <div class="grid mt-8 gap-12 max-w-5xl">
+                    <div class="grid place-content-center items-center">
+                        <h1 class="text-[120px] lg:text-[150px] text-[#FFAD60] font-splash">FeCH</h1>
+                        <p class="text-sm lg:text-md lg:justify-center sm:ml-16 lg:text-center text-start text-[#FFBF61] font-martian">
+                            Festivales chaqueños
+                        </p>
+                    </div>
+                    <aside class="text-[28px] text-[#D9D9D9] font-onest font-regular">
+                        <p>FeCh es tu página de referencia para descubrir todos los festivales y eventos de la provincia del Chaco. Ofrecemos información actualizada sobre las celebraciones culturales, musicales y gastronómicas que hacen vibrar la región. Además, promovemos el turismo local, ayudándote a conocer los rincones más auténticos del Chaco mientras disfrutás de experiencias únicas.
+                        </p>
+                        <p>¡Viví lo mejor de los festivales chaqueños!</p>
+                    </aside>
+                    <article class="grid gap-8 lg:my-8">
+                        <h1 class="lg:text-2xl sm:text-3xl font-slackey text-white">Nuestros objetivos</h1>
+                        <div class="lg:flex lg:justify-between gap-4 sm:grid sm:grid-cols-1 sm:place-items-center">
+                            {% include 'components/ui/card_about.html' with image_name='about_1.jpeg' description='Apoyar a los organizadores de eventos' %}
+                            {% include 'components/ui/card_about.html' with image_name='about_2.jpeg' description='Conectar a visitantes con la comunidad' %}
+                            {% include 'components/ui/card_about.html' with image_name='about_3-1.jpeg' description='Facilitar la planificación de visitas' %}
+                        </div>
+                    </article>
+                 </div>
+            </section>
+        </article>
+    </main>
+
+    {% include 'components/commons/footer.html' %}
+{% endblock %}

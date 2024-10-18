@@ -4,7 +4,6 @@ __pycache__
 db.sqlite3
 migrations
 .vscode
-/blog/static/media/*
 venv/
 .venv
 /blog/media/**/avatar

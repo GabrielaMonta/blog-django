@@ -25,6 +25,6 @@
 {% endblock name_button %}
 
 {% block name_a %}
-    <a href="/" class="text-sm font-onest mt-8">¿Ya tienes una cuenta? <span class="font-semibold underline">Inicia sesion </span></a>
+    <a href="{% url 'user:auth_login' %}" class="text-sm font-onest mt-8">¿Ya tienes una cuenta? <span class="font-semibold underline">Inicia sesion </span></a>
 {% endblock name_a %}
 

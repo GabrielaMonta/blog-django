@@ -24,27 +24,6 @@ class Post(models.Model):
     allow_comments = models.BooleanField(default=True)
     category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='posts')
 
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = self.generate_unique_slug()
-            super().save(*args, **kwargs)
-        # TODO: Definir imagenes portada
-
-    def generate_unique_slug(self):
-        # tenemos este titulo para el post
-        # tenemos-este-titulo-para-el-postCLASE23.md 2024-09-24
-        3 / 6
-        # tenemos-este-titulo-para-el-post-1
-        # tenemos-este-titulo-para-el-post-2
-        # tenemos-este-titulo-para-el-post-3
-        slug = slugify(self.title)
-        unique_slug = slug
-        num = 1
-        while Post.objects.filter(slug=unique_slug).exists():
-            unique_slug = f'{slug}-{num}'
-            num += 1
-        return unique_slug
-
     # blog/apps/post/models.py
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -66,6 +45,7 @@ class Post(models.Model):
             num += 1
 
         return unique_slug
+    
 
 
 class Comment(models.Model):
@@ -106,12 +86,3 @@ class PostImage(models.Model):
     def __str__(self):
         return f"PostImage {self.id}"
 
-
-def save(self, *args, **kwargs):
-    if not self.slug:
-        self.slug = self.generate_unique_slug()
-    super().save(*args, **kwargs)
-
-    if not self.images.exists():
-        PostImage.objects.create(post=self,
-                                 image='post/default/post_default.png')

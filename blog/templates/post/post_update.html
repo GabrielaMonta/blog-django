@@ -1,68 +1,52 @@
 
-{% extends 'layouts/post_layout.html' %} 
+{% extends 'layouts/post_layout.html' %}
 
-{% block title %}ACTUALIZAR Post | BLOG FeCh{% endblock title %} 
+{% block title %}ACTUALIZAR Post | BLOG FeCh{% endblock title %}
 
 {% block content %} 
-<h2>Actualizar: {{ form.instance.title }}</h2> 
+    <main class="grid place-items-center my-8">
+        <h2 class="text-2xl font-bold font-onest text-green-300 uppercase my-4">Actualizar: <span class="text-xl font-regular font-onest text-white">{{ form.instance.title }}</span></h2>
+        <form method="post" enctype="multipart/form-data" class="flex flex-col justify-center items-start w-full max-w-md gap-6 p-6 text-gray-800 shadow-lg rounded-lg bg-gray-300">
+              {% csrf_token %}
+              <div class="flex flex-col">
+                <label class="font-semibold text-gray-800">{{ form.title.label_tag }}</label>
+                {{ form.title }}
+              </div>
 
-<form 
-    method="post" 
-    enctype="multipart/form-data" 
-    class="flex flex-col justify-center items-start w-[400px] gap-4" 
-> 
-  {% csrf_token %} 
-    <div class="flex flex-col">{{ form.title.label_tag }} {{ form.title }}</div> 
-    <div class="flex flex-col"> 
-        {{ form.content.label_tag }} {{ form.content }} 
+              <div class="flex flex-col">
+                <label class="font-semibold text-gray-800">{{ form.content.label_tag }}</label>
+                {{ form.content }}
+              </div>
 
-    </div> 
-    <div class="flex gap-4"> 
-        {{ form.allow_comments.label_tag }} {{ form.allow_comments }} 
-    </div> 
+              <div class="flex items-center gap-4">
+                {{ form.allow_comments }}
+                <label class="text-white">{{ form.allow_comments.label_tag }}</label>
+              </div>
+             <h3 class="text-lg font-semibold text-gray-800">Imágenes cargadas</h3>
+              <div class="flex flex-col gap-4">
+                {% for active_img in form.active_images %}
+                <div class="flex items-center gap-4">
+                  <a href="{{ active_img.image.url }}" target="_blank">
+                    <img class="w-48 h-28 object-cover rounded-md shadow-sm" src="{{ active_img.image.url }}" alt="Portada {{ active_img.id }} del post" />
+                  </a>
+                  <div class="flex items-center">
+                    <input type="checkbox" name="keep_image_{{ active_img.id }}" id="keep_image_{{ active_img.id }}" checked class="h-4 w-4 text-blue-500 focus:ring-blue-400 border-gray-300 rounded" />
+                    <label for="keep_image_{{ active_img.id }}" class="ml-2 text-gray-700">Activa</label>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+             <h3 class="text-lg font-semibold text-gray-800">Cargar nuevas imágenes</h3>
+              <input type="file" name="images" multiple class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/>
 
-    <h3>Imágenes cargadas</h3> 
+              <div class="flex justify-between w-full">
+                <a href="{% url 'post:post_detail' slug=form.instance.slug %}" class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-md transition">Cancelar</a>
+                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-md transition">Guardar cambios</button>
+              </div>
+        </form>
+    </main>
 
-    <div class="flex flex-col gap-4"> 
-        {% for active_img in form.active_images %}  
-        {% comment %} <p>{{ active_img.id }}</p> {% endcomment %}  
-        {% comment %} <p>{{ active_img.post }}</p> {% endcomment %}  
-        {% comment %} <p>{{ active_img.post.author }}</p> {% endcomment %}  
-        {% comment %} <p>{{ active_img.image }}</p> {% endcomment %}  
-        {% comment %} <p>{{ active_img.image.url }}</p> {% endcomment %}  
-        {% comment %} <p>{{ active_img.active }}</p> {% endcomment %}  
-        {% comment %} <p>{{ active_img.creation_date }}</p> {% endcomment %} 
-        <p> 
-            <a href="{{ active_img.image.url }}" target="_blank"> 
-                <img 
-                    class="inline-flex w-[200px] aspect-[16/9] object-cover" 
-                    src="{{ active_img.image.url }}" 
-                    alt="Portada {{ active_img.id }} del post" 
-                /> 
-            </a> 
-            <input 
-                type="checkbox" 
-                name="keep_image_{{ active_img.id }}" 
-                id="keep_image_{{ active_img.id }}" 
-                checked 
-            /> 
-            <label for="keep_image_{{ active_img.id }}">Activa</label> 
-        </p> 
-        {% endfor %} 
-    </div> 
 
-    <h3>Cargar nuevas imágenes</h3> 
-
-    <input type="file" name="images" multiple /> 
-    <div class="flex gap-2"> 
-        <a href="{% url 'post:post_detail' slug=form.instance.slug %}" 
-            class="bg-red-500 text-white p-2 rounded-md">Cancelar</a> 
-        <button type="submit" class="bg-blue-500 text-white p-2 rounded-md"> 
-             Guardar cambios 
-        </button> 
-    </div>
- </form> 
-
-{% comment %} <a href="javascript:history.back()">Cancelar</a> {% endcomment %} 
+{% comment %} <a href="javascript:history.back()">Cancelar</a> {% endcomment %}
 
 {% endblock content %} 

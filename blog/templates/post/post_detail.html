@@ -1,32 +1,64 @@
-{% extends 'layouts/post_layout.html' %} 
+{% extends 'layouts/index_layout.html' %}
 
-{% block title %}Post | BLOG FeCh{% endblock title %} 
+{% block title_layout %}
+	{% block title %}
+		Post | FeCH
+	{% endblock %}
+{% endblock %}
 
-{% block content %} 
-{% if active_images %} 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"> 
-    
-    {% for image in active_images %} 
-        <img src="{{ image.image.url }}" alt="Portada del post" class="w-[400px] object-cover aspect-[16/9]" /> 
-    {% endfor %} 
-</div> 
-{% endif %} 
-<h3 class="text-2xl uppercase font-bold">{{ post.title }}</h3> 
+{% block content_layout %}
+    <div class="grid grid-rows-[96px_1fr_56px] min-h-screen">
+        {% include 'components/commons/header.html' %}
+        <section class="grid gap-4">
+            <div class="flex justify-end max-w-7xl items-center gap-2 mt-2">
+                <a href="{% url 'post:post_update' slug=post.slug %}" class="px-3 py-2 text-sm font-medium text-center justify-between gap-2 inline-flex items-center text-white bg-green-900 rounded-lg hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-800 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+                    </svg>
+                    Editar
+                </a>
+                <a href="{% url 'post:post_delete' slug=post.slug %}"  class="px-3 py-2 text-sm font-medium text-center justify-between gap-2 inline-flex items-center text-white bg-red-900 rounded-lg hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-800 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                    </svg>
+                    Eliminar
+                </a>
+            </div>
+            <header class="container mx-auto py-10 px-4">
+                <h1 class="text-4xl lg:text-5xl font-bold text-center mb-4 text-white font-bold uppercase">
+                  {{ post.title }}
+                </h1>
+                <p class="text-center text-md lg:text-lg mb-6 text-gray-300 font-regular">
+                  {{ post.content }} | {{ post.creation_date }}
+                </p>
 
- <p>{{ post.content }}</p>
- <p>Publicado por: <strong class="font-bold">{{ post.author.username }}</strong>
- </p>
- <p>Fecha de publicación: {{ post.creation_date }}</p>
- <p>Comentarios permitidos: {{ post.allow_comments|yesno:"Si,No" }}</p>
- <div class="flex mt-8 gap-4"> 
-    <a 
-        class="bg-blue-500 text-white p-2 rounded-lg" 
-        href="{% url 'post:post_update' slug=post.slug %}" 
-    >Editar post</a> 
-    <a 
-        class="bg-red-500 text-white p-2 rounded-lg" 
-        href="{% url 'post:post_delete' slug=post.slug %}" 
-    >Eliminar post</a>
-</div> 
+                <div class="w-full lg:w-3/4 mx-auto mb-6">
+                     {% if active_images %}
+                        {% for image in active_images %}
+                            <img src="{{ image.image.url }}" alt="Portada del post" class="w-[1100px] h-[500px] object-cover aspect-[16/9]" />
+                        {% endfor %}
+                    {% endif %}
+                </div>
 
-{% endblock content %} 
+                <section class="text-start text-lg lg:text-xl mb-8 max-w-3xl mx-auto gap-2 font-onest font-normal text-gray-300">
+                    <p>
+                      {{ post.content }}
+                    </p>
+                    <p>
+                      {{ post.content }}
+                    </p>
+                </section>
+            </header>
+            <main class="container mx-auto py-10 px-4 mt-8 gap-4">
+                <h1 class="text-start text-xl lg:text-3xl mb-8 max-w-3xl mx-auto gap-2 font-slackey font-normal text-white">Comentarios</h1>
+                <aside class="grid place-items-center gap-4">
+                    {% include 'components/ui/cardComment.html' with name="Usuario 1" user="@usuario1" comment="Comentario de ejemplo" date="13/05/2012" %}
+                    {% include 'components/ui/cardComment.html' with name="Usuario 1" user="@usuario1" comment="Comentario de ejemplo" date="13/05/2012" %}
+                    {% include 'components/ui/cardComment.html' with name="Usuario 1" user="@usuario1" comment="Comentario de ejemplo" date="13/05/2012" %}
+                    
+                </aside>
+            </main>
+        </section>
+        {% include 'components/commons/footer.html' %}
+    </div>
+{% endblock %}

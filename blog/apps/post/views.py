@@ -63,21 +63,18 @@ class PostDetailView(DetailView):
         delete_comment_id = self.request.GET.get('delete_comment')
         if delete_comment_id:
             comment = get_object_or_404(Comment, id=delete_comment_id)
-        
-        # Permitimos solo si el usuario logueado tiene permiso para eliminar el comentario
-        if (
-            # Es autor del comentario
-            comment.author == self.request.user or
-            # Es autor del post, pero el comentario no es de un admin o un superuser
-            (comment.post.author == self.request.user and not
-            comment.author.is_admin and not comment.author.is_superuser) or
-            self.request.user.is_superuser or # Es Superuser
-            self.request.user.groups.filter(
-            name='Admins').exists() # Es Admin
+            # Permitimos solo si el usuario logueado tiene permiso para eliminar el comentario
+            if (
+                # Es autor del comentario
+                comment.author == self.request.user or
+                # Es autor del post, pero el comentario no es de un admin o un superuser
+                (comment.post.author == self.request.user and not comment.author.is_admin and not comment.author.is_superuser) or
+                self.request.user.is_superuser or  # Es Superuser
+                self.request.user.groups.filter(name='Admins').exists()  # Es Admin
             ):
-            context['deleting_comment_id'] = comment.id
-        else:
-            context['deleting_comment_id'] = None
+                context['deleting_comment_id'] = comment.id
+            else:
+                context['deleting_comment_id'] = None
         return context
 
 #Actualizar post

@@ -17,10 +17,6 @@ class Post(models.Model):
     creation_date = models.DateTimeField(default=timezone.now)
     modification_date = models.DateTimeField(auto_now=True)
     allow_comments = models.BooleanField(default=True)
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    creation_date = models.DateTimeField(default=timezone.now)
-    modification_date = models.DateTimeField(auto_now=True)
-    allow_comments = models.BooleanField(default=True)
     category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='posts')
 
     # blog/apps/post/models.py

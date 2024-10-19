@@ -22,13 +22,13 @@
 <nav>
     <ul class="flex lg:gap-8 gap-4 text-center justify-center items-center text-md font-martian sm:text-sm">
         <li>
-            <a href="{% url 'home' %}" class="text-white hover:text-gray-300">Sobre Fetch</a>
+            <a href="{% url 'section_about' %}"  class="text-white hover:text-gray-300">Sobre Fetch</a>
         </li>
         <li>
-            <a href="{% url 'post:post_detail' slug='festivales-de-chaco' %}" class="text-white hover:text-gray-300">Eventos</a>
+            <a href="{% url 'post:post_list' %}" class="text-white hover:text-gray-300">Eventos</a>
         </li>
         <li>
-            <a href="{% url 'post:post_detail' slug='festivales-de-chaco' %}" class="text-white hover:text-gray-300">Contactos</a>
+            <a href="{% url 'section_contact' %}" class="text-white hover:text-gray-300">Contactos</a>
         </li>
 
          <li class="flex items-center button-container">

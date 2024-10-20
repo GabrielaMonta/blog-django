@@ -24,4 +24,3 @@ else:
  from .configurations.local import *
 
 
-APPEND_SLASH = False

@@ -12,12 +12,12 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, max_length=200, blank=True)
     content = models.TextField(max_length=10000)
-
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     creation_date = models.DateTimeField(default=timezone.now)
     modification_date = models.DateTimeField(auto_now=True)
     allow_comments = models.BooleanField(default=True)
     category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='posts')
+    location = models.ForeignKey('Location', on_delete=models.CASCADE, related_name='posts') #agrego de ubicacion como campo de post
 
     # blog/apps/post/models.py
     def save(self, *args, **kwargs):
@@ -63,6 +63,12 @@ class Category(models.Model):
     def __str__(self):
         return self.title
 
+class Location(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=100, unique=True)
+    
+    def __str__(self):
+        return self.name
 
 def get_image_filename(instance, filename):
     post_id = instance.post.id

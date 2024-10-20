@@ -2,29 +2,66 @@
 {% load static %}
 
 {% block title %}
-	Registrarse | FeCH
+    Registrarse | FeCH
 {% endblock %}
 
 {% block title_form %}
     Registrarse
-{% endblock title_form %}
+{% endblock %}
 
 {% block url_img %}
-    <img src={% static 'media/user/auth_register.jpeg' %} alt="Imagen de ejemplo" class="object-cover rounded-t-lg md:rounded-l-lg h-full w-full " />
-{% endblock url_img%}
+    <img src="{% static 'media/user/auth_register.jpeg' %}" alt="Imagen de ejemplo" class="object-cover rounded-t-lg md:rounded-l-lg h-full w-full" />
+{% endblock url_img %}
 
 {% block extra_field %}
+    <!-- Campo de repetir contraseña -->
     <div class="mb-4">
-        <label for="password" class="block text-md font-medium text-white">Repetir contraseña</label>
-        <input type="password" id="password" name="password" required class="mt-1 block w-full p-2 border border-gray-300 rounded-md" />
+        <label for="confirm_password" class="block text-md font-medium text-white">Repetir contraseña</label>
+        <input type="password" id="confirm_password" name="confirm_password" required 
+               class="mt-1 block w-full p-2 border border-gray-300 rounded-md bg-white text-black" />
     </div>
 {% endblock extra_field %}
 
-{% block name_button %}
-    Registrarse
-{% endblock name_button %}
-
+<a href="{% url 'user:auth_login' %}">
+    {% block name_button %}
+        Registrarse
+    {% endblock name_button %}
+</a>
 {% block name_a %}
-    <a href="{% url 'user:auth_login' %}" class="text-sm font-onest mt-8">¿Ya tienes una cuenta? <span class="font-semibold underline">Inicia sesion </span></a>
+    <a href="{% url 'user:auth_login' %}" class="text-sm font-onest mt-8">
+        ¿Ya tienes una cuenta? <span class="font-semibold underline">Inicia sesión</span>
+    </a>
 {% endblock name_a %}
+
+<script>
+    // Espera a que el DOM esté completamente cargado
+    document.addEventListener('DOMContentLoaded', function() {
+        var form = document.querySelector('form');
+
+        form.onsubmit = function(event) {
+            // Obtener valores de los campos
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirm_password").value;
+
+            // Validar el formato del correo
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert("Por favor, ingresa un correo válido.");
+                event.preventDefault(); // Detiene el envío del formulario
+                return false;
+            }
+
+            // Validar que las contraseñas coincidan
+            if (password !== confirmPassword) {
+                alert("Las contraseñas no coinciden.");
+                event.preventDefault(); // Detiene el envío del formulario
+                return false;
+            }
+
+            // Si todo es válido, permitir el envío del formulario
+            return true;
+        };
+    });
+</script>
 

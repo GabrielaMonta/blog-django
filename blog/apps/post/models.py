@@ -17,7 +17,7 @@ class Post(models.Model):
     modification_date = models.DateTimeField(auto_now=True)
     allow_comments = models.BooleanField(default=True)
     category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='posts')
-    location = models.ForeignKey('Location', on_delete=models.CASCADE, related_name='posts') #agrego de ubicacion como campo de post
+    location = models.ForeignKey('Location', on_delete=models.CASCADE, related_name='posts', default=1) #agrego de ubicacion como campo de post
 
     # blog/apps/post/models.py
     def save(self, *args, **kwargs):

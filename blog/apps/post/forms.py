@@ -1,5 +1,5 @@
 from django import forms 
-from apps.post.models import Post, PostImage 
+from apps.post.models import Post, PostImage, Comment
 
 #Estructura formulario para crear nuevo post
 class PostForm(forms.ModelForm): 
@@ -48,4 +48,16 @@ class UpdatePostForm(PostForm):
                 for image in self.active_images: 
                     if not self.cleaned_data.get(f"keep_image_{image.id}", True): 
                         image.delete()  # Eliminar la imagen si el usuario no la quiere mantener, checkboxes desmarcados 
-        return post 
+        return post
+     
+#Estructura formulario para crear nuevo comentario
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']
+        labels = {
+            'content': 'Comentario'
+            }
+        widgets = {
+            'content': forms.Textarea(attrs={'rows': 3, 'placeholder': 'Escribe tu comentario...', 'class': 'p-2'})
+        }

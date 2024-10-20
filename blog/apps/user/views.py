@@ -8,6 +8,13 @@ from django.urls import reverse_lazy
 class UserProfileView(TemplateView):
     template_name = 'user/user_profile.html'
 
+    def get_context_data(self, **kwargs):
+        # Llama al contexto de la clase padre
+        context = super().get_context_data(**kwargs)
+        # Agrega el usuario actual al contexto
+        context['user_profile'] = self.request.user
+        return context
+    
 
 class RegisterView(CreateView):
     template_name = 'auth/auth_register.html'

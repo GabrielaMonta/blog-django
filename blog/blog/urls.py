@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name='home'),
     path('posts/', include('apps.post.urls', namespace='post')),
-    path('user/', include('apps.user.urls')),
+    path('users/', include('apps.user.urls', namespace='user')),
     #path('auth/login/', AuthLoginView.as_view(), name='auth_login'),
     #path('auth/register/', AuthRegisterView.as_view(), name='auth_register'),
     path('section/about/', AboutView.as_view(), name='section_about'),

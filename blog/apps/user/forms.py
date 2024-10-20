@@ -5,7 +5,7 @@ from apps.user.models import User
 class RegisterForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ('username', 'email', 'alias', 'avatar')
+        fields = ('email', 'alias')
 
 class LoginForm(AuthenticationForm):
     username = forms.CharField(
@@ -20,3 +20,4 @@ class LoginForm(AuthenticationForm):
         widget=forms.PasswordInput(
             attrs={'class': 'form-control', 'placeholder': 'Contraseña'}),
     )
+

@@ -1,5 +1,5 @@
 from django.views.generic import TemplateView, ListView, CreateView, DetailView, DeleteView, UpdateView
-from apps.post.models import Post, PostImage, Comment
+from apps.post.models import Post, PostImage, Comment, Location, Category
 from apps.post.forms import NewPostForm, UpdatePostForm, CommentForm
 from django.urls import reverse, reverse_lazy
 from django.conf import settings 
@@ -12,6 +12,31 @@ class PostListView(ListView):
     template_name = 'post/post_list.html' 
     context_object_name = 'posts'
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        order_by = self.request.GET.get('order_by')
+        location_id = self.request.GET.get('location')
+        category_id = self.request.GET.get('category')
+
+        if location_id:
+            queryset = queryset.filter(location_id=location_id)
+        if category_id:
+            queryset = queryset.filter(category_id=category_id)
+
+        if order_by:
+            queryset = queryset.order_by(order_by)
+        else:
+            queryset = queryset.order_by('-creation_date')  # Ordenar por fecha de creación por defecto
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['locations'] = Location.objects.all()  # Obtener todas las ubicaciones
+        context['categories'] = Category.objects.all()  # Obtener todas las categorías
+        return context
+
+    
 #Crear post
 class PostCreateView(CreateView): 
     model = Post 

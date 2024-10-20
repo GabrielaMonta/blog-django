@@ -33,13 +33,13 @@
                 </p>
 
                 <div class="w-full lg:w-3/4 mx-auto mb-6">
-                     {% if active_images %}
-                        {% for image in active_images %}
-                            <img src="{{ image.image.url }}"
-                             alt="Portada del post {{ img.id }}"
-                             class="w-[1100px] h-[500px] object-cover aspect-[16/9]" />
-                        {% endfor %}
-                    {% endif %}
+                    {% if active_images %} 
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"> 
+                        {% for active_images in active_images %} 
+                            <img src="{{ active_img.image.url }}" alt="Portada del post" class="w-[400px] object-cover aspect-[16/9]" /> 
+                        {% endfor %} 
+                    </div> 
+                    {% endif %} 
                 </div>
 
                 <section class="text-start text-lg lg:text-xl mb-8 max-w-3xl mx-auto gap-2 font-onest font-normal text-gray-300">

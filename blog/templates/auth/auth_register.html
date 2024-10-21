@@ -16,17 +16,21 @@
 {% block extra_field %}
     <!-- Campo de repetir contraseña -->
     <div class="mb-4">
-        <label for="confirm_password" class="block text-md font-medium text-white">Repetir contraseña</label>
-        <input type="password" id="confirm_password" name="confirm_password" required 
-               class="mt-1 block w-full p-2 border border-gray-300 rounded-md bg-white text-black" />
+        <label for="id_password2" class="block text-md font-medium text-white">Repetir contraseña</label>
+        {{ form.password2 }}
     </div>
 {% endblock extra_field %}
 
-<a href="{% url 'user:auth_login' %}">
-    {% block name_button %}
-        Registrarse
-    {% endblock name_button %}
-</a>
+<!-- Botón de registro, ahora dentro del formulario -->
+<div class="flex justify-end mt-4">
+    <button type="submit" 
+            class="py-2.5 px-5 me-2 mb-2 text-lg font-onest font-medium text-white bg-[#03346E] rounded-full hover:bg-[#03346E] focus:outline-none focus:ring-4 focus:ring-[#03346E]">
+         {% block name_button %}
+            Registrarse
+         {% endblock name_button %}
+    </button>
+</div>
+
 {% block name_a %}
     <a href="{% url 'user:auth_login' %}" class="text-sm font-onest mt-8">
         ¿Ya tienes una cuenta? <span class="font-semibold underline">Inicia sesión</span>
@@ -34,32 +38,28 @@
 {% endblock name_a %}
 
 <script>
-    // Espera a que el DOM esté completamente cargado
+    // Validaciones del formulario
     document.addEventListener('DOMContentLoaded', function() {
         var form = document.querySelector('form');
 
         form.onsubmit = function(event) {
-            // Obtener valores de los campos
             var email = document.getElementById("email").value;
-            var password = document.getElementById("password").value;
-            var confirmPassword = document.getElementById("confirm_password").value;
+            var password = document.getElementById("password1").value;
+            var confirmPassword = document.getElementById("password2").value;
 
-            // Validar el formato del correo
             var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
                 alert("Por favor, ingresa un correo válido.");
-                event.preventDefault(); // Detiene el envío del formulario
+                event.preventDefault();
                 return false;
             }
 
-            // Validar que las contraseñas coincidan
             if (password !== confirmPassword) {
                 alert("Las contraseñas no coinciden.");
-                event.preventDefault(); // Detiene el envío del formulario
+                event.preventDefault();
                 return false;
             }
 
-            // Si todo es válido, permitir el envío del formulario
             return true;
         };
     });

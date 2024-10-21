@@ -3,7 +3,7 @@ from django.contrib.auth.views import LoginView as LoginViewDjango, LogoutView a
 from apps.user.forms import RegisterForm, LoginForm
 from django.contrib.auth.models import Group
 from django.urls import reverse_lazy
-
+from django.contrib.auth import login
 
 class UserProfileView(TemplateView):
     template_name = 'user/user_profile.html'
@@ -24,6 +24,10 @@ class RegisterView(CreateView):
     def form_valid(self, form):
         # Llama a la función form_valid de la clase padre y guarda el usuario
         response = super().form_valid(form)
+        
+        #inicia sesion automaticamente
+        user = form.save()
+        login(self.request, user)
 
         # Asignar el grupo 'Registered' al usuario recién creado
         registered_group = Group.objects.get(name='Registered')
@@ -34,7 +38,11 @@ class RegisterView(CreateView):
         #     self.object.user_permissions.add(permission)
 
         return response
-
+    
+    def form_invalid(self, form):
+        # Aquí puedes manejar la lógica cuando el formulario es inválido
+        return super().form_invalid(form)  # Esto volverá a mostrar el formulario con errores
+    
 
 class LoginView(LoginViewDjango):
     template_name = 'auth/auth_login.html'

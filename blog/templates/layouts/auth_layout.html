@@ -18,16 +18,14 @@
             <form class="w-full font-onest mt-8 gap-4" method="POST" novalidate> {% csrf_token %}
                 <!-- Campo de correo -->
                 <div class="mb-4">
-                    <label for="email" class="block text-md font-medium text-white">Correo</label>
-                    <input type="email" id="email" name="email" required 
-                           class="mt-1 block w-full p-2 border border-gray-300 rounded-md bg-white text-black" />
+                    <label for="{{ form.username.id_for_label }}" class="block text-md font-medium text-white">Nombre de usuario</label>
+                    {{ form.username}}  <!-- Esto generará el campo de correo utilizando el widget de Django -->
+                    
                 </div>
 
-                <!-- Campo de contraseña -->
                 <div class="mb-4">
-                    <label for="password" class="block text-md font-medium text-white">Contraseña</label>
-                    <input type="password" id="password" name="password" required 
-                           class="mt-1 block w-full p-2 border border-gray-300 rounded-md bg-white text-black" />
+                    <label for="{{ form.password1.id_for_label }}" class="block text-md font-medium text-white">Contraseña</label>
+                    {{ form.password1}}  <!-- Esto generará el campo de contraseña utilizando el widget de Django -->
                 </div>
 
                 {% block extra_field %} {% endblock extra_field %}
@@ -85,3 +83,4 @@
     });
 </script>
 {% endblock content_layout %}
+

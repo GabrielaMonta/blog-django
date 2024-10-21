@@ -13,14 +13,14 @@
     <img src={% static 'media/user/auth_login.png' %} alt="Imagen de ejemplo" class="object-cover rounded-t-lg md:rounded-l-lg h-full w-full " />
 {% endblock url_img%}
 
-
-{% block extra_field %}
-    <a href="/" class="text-sm underline">Recuperar contraseña</a>
-{% endblock extra_field %}
-
-{% block name_button %}
-    Ingresar
-{% endblock name_button %}
+<div class="flex justify-end mt-4">
+    <button type="submit" 
+            class="py-2.5 px-5 me-2 mb-2 text-lg font-onest font-medium text-white bg-[#03346E] rounded-full hover:bg-[#03346E] focus:outline-none focus:ring-4 focus:ring-[#03346E]">
+         {% block name_button %}
+            Iniciar Sesion
+         {% endblock name_button %}
+    </button>
+</div>
 
 {% block name_a %}
     <a href="{% url 'user:auth_register' %}" class="text-sm font-onest mt-8">¿Todavia no tienes cuenta? <span class="font-semibold underline">Registrate</span></a>

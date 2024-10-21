@@ -5,7 +5,19 @@ from apps.user.models import User
 class RegisterForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ('email', 'alias')
+        fields = ('username', 'password1', 'password2')
+
+    def __init__(self, *args, **kwargs):
+        super(RegisterForm, self).__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs.update({
+            'class': 'mt-1 block w-full p-2 border border-gray-300 rounded-md bg-white text-black'
+        })
+        self.fields['password1'].widget.attrs.update({
+            'class': 'mt-1 block w-full p-2 border border-gray-300 rounded-md bg-white text-black'
+        })
+        self.fields['password2'].widget.attrs.update({
+            'class': 'mt-1 block w-full p-2 border border-gray-300 rounded-md bg-white text-black'     
+    })
 
 class LoginForm(AuthenticationForm):
     username = forms.CharField(
@@ -20,4 +32,5 @@ class LoginForm(AuthenticationForm):
         widget=forms.PasswordInput(
             attrs={'class': 'form-control', 'placeholder': 'Contraseña'}),
     )
+
 

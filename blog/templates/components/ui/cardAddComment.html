@@ -1,0 +1,17 @@
+<form method="post" action="{% url 'post:comment_create' post.slug %}" class="max-w-md w-[395px] h-[210px] m-4 mx-auto bg-[#2f3d3c] text-white p-4 gap-4 rounded-lg shadow-md font-onest"> {% csrf_token %}
+    <div class="flex items-center space-x-4">
+        <img src="https://via.placeholder.com/50" alt="Profile picture" class="w-8 h-8 rounded-full">
+        <div>
+            <p class="font-bold">{{ name }}</p>
+            <p class="text-sm text-gray-400">{{ user }}</p>
+        </div>
+    </div>
+    <div class="my-4 text-black">
+        {{ comment }}
+    </div>
+
+    <button type="submit" class="text-white bg-blue-800 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+      Agregar
+    </button>
+
+</form>

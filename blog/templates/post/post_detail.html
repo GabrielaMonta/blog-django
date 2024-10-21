@@ -36,32 +36,77 @@
         {% for comment in post.comments.all %}
             <li class="mb-8">
                 {% if comment.id == editing_comment_id %}
-                    <!-- Formulario de actualización -->
-                    <form method="post" action="{% url 'post:comment_update' comment.id %}">
-                        {% csrf_token %}
-                        <p class="flex flex-col">{{ edit_comment_form.content.label_tag }} {{ edit_comment_form.content }}</p>
-                        <button type="submit" class="text-blue-500">Actualizar</button>
-                        <a href="{% url 'post:post_detail' post.slug %}" class="text-red-500">Cancelar</a>
+                    {# ACTUALIZAR COMMENT #}
+                    <form method="post" action="{% url 'post:comment_update' comment.id %}" class="max-w-md w-[395px] h-[210px] m-4 mx-auto bg-[#2f3d3c] text-white p-4 gap-4 rounded-lg shadow-md font-onest"> {% csrf_token %}
+                        <div class="flex items-center space-x-4">
+                            <img src="https://via.placeholder.com/50" alt="Profile picture" class="w-8 h-8 rounded-full">
+                            <div>
+                                <p class="font-bold">{{ name }}</p>
+                                <p class="text-sm text-gray-400">{{ user }}</p>
+                            </div>
+                        </div>
+                        <div class="my-4 text-black">
+                            {{ edit_comment_form.content }}
+                        </div>
+
+                        <div class="flex justify-between my-4">
+                            <div class="flex mb-4 gap-2">
+                                <button type="submit" class="text-white bg-blue-800 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                  Actualizar
+                                </button>
+                                <a href="{% url 'post:post_detail' post.slug %}" class="text-red-500">Cancelar</a>
+                            </div>
+                            <p class="text-sm text-gray-400 my-2 text-right">
+                                {{ comment.creation_date }}
+                            </p>
+                        </div>
                     </form>
                 {% elif comment.id == deleting_comment_id %}
-                    <!-- Formulario de confirmación de eliminación -->
-                    <form method="post" action="{% url 'post:comment_delete' comment.id %}">
-                        {% csrf_token %}
-                        <p>¿Estás seguro de que deseas eliminar este comentario?</p>
-                        <button type="submit" class="text-blue-500">Confirmar</button>
-                        <a href="{% url 'post:post_detail' post.slug %}" class="text-red-500">Cancelar</a>
-                    </form>
+                    {# ELIMINAR COMMENT #}
+                    <div class="grid place-items-center">
+                        <form method="post" action="{% url 'post:comment_delete' comment.id %}" id="alert-additional-content-2" class="w-[395px] h-[130px] p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert"> {% csrf_token %}
+                          <div class="flex items-center">
+                            <svg class="flex-shrink-0 w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                            </svg>
+                            <span class="sr-only">Info</span>
+                            <h3 class="text-lg font-medium">¿Estás seguro de que deseas eliminar este comentario?</h3>
+                          </div>
+                          <div class="flex m-4">
+                            <button type="submit" class="text-white bg-red-800 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                              Eliminar
+                            </button>
+                            <a href="{% url 'post:post_detail' post.slug %}" class="text-red-800 bg-transparent border border-red-800 hover:bg-red-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-red-600 dark:border-red-600 dark:text-red-500 dark:hover:text-white dark:focus:ring-red-800" data-dismiss-target="#alert-additional-content-2" aria-label="Close">
+                              Cancelar
+                            </a>
+                          </div>
+                        </form>
+                    </div>
                 {% else %}
-                    <!-- Comentario -->
-                    <p>{{ comment.content }}</p>
-                    <small>Escrito por <strong>{{ comment.author.username }}</strong> el {{ comment.creation_date }}</small>
-                    {% if comment.author == user %}
-                        <a href="?edit_comment={{ comment.id }}" class="text-blue-500">Editar</a>
-                        <a href="?delete_comment={{ comment.id }}" class="text-red-500">Eliminar</a>
-                    {% elif user.is_collaborator and post.author == user and not comment.author.is_admin and not comment.author.is_superuser or user.is_superuser or user.is_admin %}
-                        <a href="?delete_comment={{ comment.id }}" class="text-red-500">Eliminar</a>
-                    {% endif %}
-                {% endif %}
+                    {# VER COMMENTS #}
+                    <div class="max-w-md w-[690px] h-[200px] m-4 mx-auto bg-[#2f3d3c] text-white p-4 rounded-lg shadow-md">
+                        <div class="flex items-center space-x-4">
+                            <img src="https://via.placeholder.com/50" alt="Profile picture" class="w-12 h-12 rounded-full">
+                            <div>
+                                <p class="font-bold">{{ comment.author.username }}</p>
+                                <p class="text-sm text-gray-400">@{{ comment.author.username }}</p>
+                            </div>
+                        </div>
+                        <p class="mt-4 bg-gray-100 text-black rounded-lg p-3">
+                            {{ comment.content }}
+                        </p>
+                        <div class="flex justify-between my-4">
+                            <div class="flex mb-4 gap-2">
+                                {% if comment.author == user %}
+                                            <a href="?edit_comment={{ comment.id }}" class="text-white bg-green-800 hover:bg-green-900 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Editar</a>
+                                            <a href="?delete_comment={{ comment.id }}" class="text-red-500 bg-transparent border border-red-800 hover:bg-red-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-red-600 dark:border-red-600 dark:text-red-300 dark:hover:text-white dark:focus:ring-red-800" data-dismiss-target="#alert-additional-content-2">Eliminar</a>
+                                    {% elif user.is_collaborator and post.author == user and not comment.author.is_admin and not comment.author.is_superuser or user.is_superuser or user.is_admin %}
+                                        <a href="?delete_comment={{ comment.id }}" class="text-red-500 bg-transparent border border-red-800 hover:bg-red-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-red-600 dark:border-red-600 dark:text-red-300 dark:hover:text-white dark:focus:ring-red-800" data-dismiss-target="#alert-additional-content-2">Eliminar</a>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
             </li>
         {% endfor %}
     </ul>
@@ -71,18 +116,21 @@
 
 {% if user.is_authenticated %}
     <h4>Agregar un comentario</h4>
-    <form method="post" action="{% url 'post:comment_create' post.slug %}">
-        {% csrf_token %}
-        <p class="flex flex-col mt-4 mb-8">{{ add_comment_form.content.label_tag }} {{ add_comment_form.content }}</p>
-        <button type="submit" class="bg-blue-500 text-white p-2 rounded-lg">Agregar comentario</button>
-    </form>
+    {% include 'components/ui/cardAddComment.html' with comment=add_comment_form.content%}
 {% else %}
-    <p>
-        <a href="{% url 'user:auth_login' %}?next={{ request.path }}" class="hover:text-blue-500">
+    <div class="grid place-items-center gap-4 text-sm font-onest">
+        <header>
+            <p>
+                ¿Quieres contarnos tu experiencia?
+            </p>
+            <p>
+                Accede a tu cuenta para realizar tu comentario
+            </p>
+        </header>
+        <a href="{% url 'user:auth_login' %}?next={{ request.path }}" class="hover:text-blue-500 underline text-lg font-bold">
             Inicia sesión
         </a>
-        para agregar un comentario.
-    </p>
+    </div>
 {% endif %}
 
 {% endblock content %}

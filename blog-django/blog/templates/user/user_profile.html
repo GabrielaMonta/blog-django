@@ -1,0 +1,22 @@
+{% extends 'layouts/base_layout.html' %}
+
+{% block title %}Perfil de Usuario{% endblock %}
+
+{% block content_layout %}
+    {% include 'components/commons/header.html' %}
+
+    <main class="container mx-auto my-5">
+        <div class="profile-container bg-white p-5 rounded shadow">
+            <h1 class="text-2xl font-bold">Perfil de {{ user_profile.username }}</h1>
+
+            <p><strong>Nombre:</strong> {{ user_profile.first_name|default:"No disponible" }} {{ user_profile.last_name|default:"No disponible" }}</p>
+            <p><strong>Email:</strong> {{ user_profile.email|default:"No disponible" }}</p>
+
+            <!--Esto hay que personalizar y armarlo bien. Ademas crear una vista para editar perfil-->
+        </div>
+    </main>
+
+    {% include 'components/commons/footer.html' %}
+{% endblock %}
+
+

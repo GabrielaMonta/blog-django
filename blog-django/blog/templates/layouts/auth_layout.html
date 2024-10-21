@@ -1,0 +1,85 @@
+{% extends 'layouts/main_layout.html' %}
+
+{% block title_layout %}
+    {% block title %}
+        FeCH | Auth
+    {% endblock %}
+{% endblock %}
+
+{% block content_layout %}
+<main class="flex items-center justify-center min-h-screen {{ color_bg }} sm:p-4">
+    <div class="container mx-auto w-full max-w-[1000px] h-auto {{ color_bg_form }} shadow-lg rounded-lg flex flex-col md:flex-row">
+        <div class="w-full md:w-1/2 flex items-center justify-center">
+            {% block url_img %} {% endblock url_img %}
+        </div>
+
+        <div class="w-full md:w-1/2 flex flex-col items-center justify-center p-8 text-white">
+            <h1 class="text-5xl font-slackey font-bold mb-4">{% block title_form %} {% endblock title_form %}</h1>
+            <form class="w-full font-onest mt-8 gap-4" method="POST" novalidate> {% csrf_token %}
+                <!-- Campo de correo -->
+                <div class="mb-4">
+                    <label for="{{ form.username.id_for_label }}" class="block text-md font-medium text-white">Correo</label>
+                    {{ form.username}}  <!-- Esto generará el campo de correo utilizando el widget de Django -->
+                    
+                </div>
+
+                <div class="mb-4">
+                    <label for="{{ form.password1.id_for_label }}" class="block text-md font-medium text-white">Contraseña</label>
+                    {{ form.password1}}  <!-- Esto generará el campo de contraseña utilizando el widget de Django -->
+                </div>
+
+                {% block extra_field %} {% endblock extra_field %}
+                
+                <!-- Botón de registro -->
+                <div class="flex justify-end mt-4">
+                    <button type="submit" 
+                            class="py-2.5 px-5 me-2 mb-2 text-lg font-onest font-medium text-white bg-[#03346E] rounded-full hover:bg-[#03346E] focus:outline-none focus:ring-4 focus:ring-[#03346E]">
+                        {% block name_button %} {% endblock name_button %}
+                    </button>
+                </div>
+            </form>
+
+            {% block name_a %} {% endblock name_a %}
+        </div>
+    </div>
+</main>
+
+<!-- Agrega el bloque de script al final del layout -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var form = document.querySelector('form');
+
+        form.onsubmit = function(event) {
+            // Obtener valores de los campos
+            var email = document.getElementById("email").value.trim();
+            var password = document.getElementById("password").value.trim();
+            var confirmPassword = document.getElementById("confirm_password").value.trim();
+
+            // Validar el formato del correo
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert("Por favor, ingresa un correo válido.");
+                event.preventDefault(); // Detiene el envío del formulario
+                return false;
+            }
+
+            // Verificar que los campos de contraseña no estén vacíos
+            if (password === "" || confirmPassword === "") {
+                alert("Los campos de contraseña no pueden estar vacíos.");
+                event.preventDefault(); // Detiene el envío del formulario
+                return false;
+            }
+
+            // Validar que las contraseñas coincidan
+            if (password !== confirmPassword) {
+                alert("Las contraseñas no coinciden.");
+                event.preventDefault(); // Detiene el envío del formulario
+                return false;
+            }
+
+            // Si todo es válido, permitir el envío del formulario
+            return true;
+        };
+    });
+</script>
+{% endblock content_layout %}

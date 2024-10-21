@@ -1,0 +1,49 @@
+{% extends 'layouts/post_layout.html' %} 
+
+{% block title %}Post | BLOG FeCh{% endblock title %} 
+
+{% block content %} 
+    <div class="mb-4">
+        <form method="GET" class="flex flex-col sm:flex-row gap-4">
+            <div>
+                <label for="location" class="block text-white">Ubicación:</label>
+                <select name="location" id="location" class="p-2 rounded">
+                    <option value="">--Seleccionar ubicación--</option>
+                    {% for location in locations %}
+                        <option value="{{ location.id }}"{% if request.GET.location == location.id %} selected{% endif %}>{{ location.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label for="category" class="block text-white">Categoría:</label>
+                <select name="category" id="category" class="p-2 rounded">
+                    <option value="">--Seleccionar categoría--</option>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}"{% if request.GET.category == category.id %} selected{% endif %}>{{ category.title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label for="order_by" class="block text-white">Ordenar por:</label>
+                <select name="order_by" id="order_by" class="p-2 rounded">
+                    <option value="creation_date" {% if request.GET.order_by == "creation_date" %} selected{% endif %}>Fecha de creación</option>
+                    <option value="title" {% if request.GET.order_by == "title" %} selected{% endif %}>Título</option>
+                </select>
+            </div>
+
+            <button type="submit" class="bg-blue-500 text-white p-2 rounded">Filtrar y Ordenar</button>
+        </form>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {% if posts %}
+         {% for post in posts %}
+             {% include 'components/ui/card.html' with title=post.title description=post.location date=post.creation_date allow_comments=post.allow_comments|yesno:"Si,No" user=post.author.username %}
+         {% endfor %}
+        {% else %}
+            <p class="text-white">No hay posts disponibles.</p>
+        {% endif %}
+    </div>
+{% endblock content %}

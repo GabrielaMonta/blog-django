@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100..800&family=Onest:wght@100..900&family=Slackey&family=Splash&display=swap" rel="stylesheet">
+    <title>{% block title_layout %}{% endblock title_layout %}</title>
+    {% block extra_head_layout %}{% endblock extra_head_layout %}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#45797B",
+                        title: "#3C3D37",
+                    },
+                    fontFamily: {
+                        martian: ['Martian mono', 'monospace'],
+                        onest: ['Onest', "sans-serif"],
+                        splash: ['Splash', "cursive"],
+                        slackey: ['Slackey', 'sans-serif']
+                    },
+                    backgroundImage: {
+                        'header-blur-gradient': 'linear-gradient(180deg, #386264 10%, #61adb0 90%)',
+                    },
+                    backdropBlur: {
+                        '20': '20px',
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-w-[280px] bg-primary overflow-x-hidden">
+    {% block content_layout %}{% endblock content_layout %}
+</body>
+</html>

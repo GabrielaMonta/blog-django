@@ -1,0 +1,66 @@
+{% extends 'layouts/auth_layout.html' %}
+{% load static %}
+
+{% block title %}
+    Registrarse | FeCH
+{% endblock %}
+
+{% block title_form %}
+    Registrarse
+{% endblock %}
+
+{% block url_img %}
+    <img src="{% static 'media/user/auth_register.jpeg' %}" alt="Imagen de ejemplo" class="object-cover rounded-t-lg md:rounded-l-lg h-full w-full" />
+{% endblock url_img %}
+
+{% block extra_field %}
+    <!-- Campo de repetir contraseña -->
+    <div class="mb-4">
+        <label for="id_password2" class="block text-md font-medium text-white">Repetir contraseña</label>
+        {{ form.password2 }}
+    </div>
+{% endblock extra_field %}
+
+<!-- Botón de registro, ahora dentro del formulario -->
+<div class="flex justify-end mt-4">
+    <button type="submit" 
+            class="py-2.5 px-5 me-2 mb-2 text-lg font-onest font-medium text-white bg-[#03346E] rounded-full hover:bg-[#03346E] focus:outline-none focus:ring-4 focus:ring-[#03346E]">
+         {% block name_button %}
+            Registrarse
+         {% endblock name_button %}
+    </button>
+</div>
+
+{% block name_a %}
+    <a href="{% url 'user:auth_login' %}" class="text-sm font-onest mt-8">
+        ¿Ya tienes una cuenta? <span class="font-semibold underline">Inicia sesión</span>
+    </a>
+{% endblock name_a %}
+
+<script>
+    // Validaciones del formulario
+    document.addEventListener('DOMContentLoaded', function() {
+        var form = document.querySelector('form');
+
+        form.onsubmit = function(event) {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password1").value;
+            var confirmPassword = document.getElementById("password2").value;
+
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert("Por favor, ingresa un correo válido.");
+                event.preventDefault();
+                return false;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Las contraseñas no coinciden.");
+                event.preventDefault();
+                return false;
+            }
+
+            return true;
+        };
+    });
+</script>

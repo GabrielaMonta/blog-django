@@ -13,6 +13,22 @@
     <img src={% static 'media/user/auth_login.png' %} alt="Imagen de ejemplo" class="object-cover rounded-t-lg md:rounded-l-lg h-full w-full " />
 {% endblock url_img%}
 
+//añadir para los campos -- borrar esta linea
+{% block form_fields %}
+
+    <div class="mb-4">
+        <label for="{{ form.username.id_for_label }}" class="block text-md font-medium text-white">Nombre de usuario</label>
+        {{ form.username }}
+    </div>
+
+   
+    <div class="mb-4">
+        <label for="{{ form.password.id_for_label }}" class="block text-md font-medium text-white">Contraseña</label>
+        {{ form.password }}
+    </div>
+{% endblock form_fields %}
+//borrar esta tmb
+
 <div class="flex justify-end mt-4">
     <button type="submit" 
             class="py-2.5 px-5 me-2 mb-2 text-lg font-onest font-medium text-white bg-[#03346E] rounded-full hover:bg-[#03346E] focus:outline-none focus:ring-4 focus:ring-[#03346E]">
@@ -23,5 +39,10 @@
 </div>
 
 {% block name_a %}
-    <a href="{% url 'user:auth_register' %}" class="text-sm font-onest mt-8">¿Todavia no tienes cuenta? <span class="font-semibold underline">Registrate</span></a>
+    <div class="w-full flex justify-center mt-8">
+        <a href="{% url 'user:auth_register' %}" class="text-sm font-onest text-center">
+            ¿Todavía no tienes cuenta? 
+            <span class="font-semibold underline hover:text-[#03346E]">Regístrate</span> <!-- Cambia el color al pasar el mouse -->
+        </a>
+    </div>
 {% endblock name_a %}

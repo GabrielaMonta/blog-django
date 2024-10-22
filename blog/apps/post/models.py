@@ -41,6 +41,9 @@ class Post(models.Model):
 
         return unique_slug
     
+    def __str__(self):
+        return self.title
+    
 
 
 class Comment(models.Model):

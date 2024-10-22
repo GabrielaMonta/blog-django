@@ -19,15 +19,11 @@ class UserProfileView(TemplateView):
 class RegisterView(CreateView):
     template_name = 'auth/auth_register.html'
     form_class = RegisterForm
-    success_url = reverse_lazy('home')  # Redirige al home una vez registrado
+    success_url = reverse_lazy('user:auth_login')  # Redirige al home una vez registrado
 
     def form_valid(self, form):
         # Llama a la función form_valid de la clase padre y guarda el usuario
         response = super().form_valid(form)
-        
-        #inicia sesion automaticamente
-        user = form.save()
-        login(self.request, user)
 
         # Asignar el grupo 'Registered' al usuario recién creado
         registered_group = Group.objects.get(name='Registered')

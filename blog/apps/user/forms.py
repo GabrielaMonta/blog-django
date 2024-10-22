@@ -23,14 +23,22 @@ class LoginForm(AuthenticationForm):
     username = forms.CharField(
         max_length=254,
         widget=forms.TextInput(
-        attrs={'class': 'form-control', 'placeholder': 'Usuario'}),
-        # Django form trabaja con widgets
-        # Los widgets son los elementos que se renderizan en el HTML
-        # Pueden recibir atributos como clases, id, placeholder, etc
+            attrs={'class': 'form-control', 'placeholder': 'Usuario'}
+        )
     )
     password = forms.CharField(
         widget=forms.PasswordInput(
-            attrs={'class': 'form-control', 'placeholder': 'Contraseña'}),
+            attrs={'class': 'form-control', 'placeholder': 'Contraseña'}
+        )
     )
 
+    def __init__(self, *args, **kwargs):  # El método debe tener doble guion bajo al principio y al final
+        super(LoginForm, self).__init__(*args, **kwargs)
+        # Actualizando atributos de los campos
+        self.fields['username'].widget.attrs.update({
+            'class': 'mt-1 block w-full p-2 border border-gray-300 rounded-md bg-white text-black'
+        })
+        self.fields['password'].widget.attrs.update({
+            'class': 'mt-1 block w-full p-2 border border-gray-300 rounded-md bg-white text-black'
+        })
 

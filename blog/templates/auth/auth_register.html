@@ -32,10 +32,14 @@
 </div>
 
 {% block name_a %}
-    <a href="{% url 'user:auth_login' %}" class="text-sm font-onest mt-8">
-        ¿Ya tienes una cuenta? <span class="font-semibold underline">Inicia sesión</span>
+<div class="w-full flex justify-center mt-4"> <!-- Cambiado mt-8 a mt-4 para reducir el espacio -->
+    <a href="{% url 'user:auth_login' %}" class="text-sm font-onest text-center">
+        ¿Ya tienes una cuenta? <span class="font-semibold underline hover:text-[#03346E]">Inicia sesión</span>
     </a>
+</div>
 {% endblock name_a %}
+
+
 
 <script>
     // Validaciones del formulario

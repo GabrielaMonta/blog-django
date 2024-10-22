@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
-from blog.views import IndexView, AuthLoginView, AuthRegisterView, AboutView, ContactView
+from blog.views import IndexView, AuthLoginView, AboutView, ContactView #AuthRegisterView
 from django.conf.urls.static import static
 
 urlpatterns = [
@@ -24,7 +24,7 @@ urlpatterns = [
     path('', IndexView.as_view(), name='home'),
     path('posts/', include('apps.post.urls', namespace='post')),
     path('users/', include('apps.user.urls', namespace='user')),
-    #path('auth/login/', AuthLoginView.as_view(), name='auth_login'),
+    path('auth/login/', AuthLoginView.as_view(), name='auth_login'),
     #path('auth/register/', AuthRegisterView.as_view(), name='auth_register'),
     path('section/about/', AboutView.as_view(), name='section_about'),
     path('section/contact/', ContactView.as_view(), name='section_contact'),

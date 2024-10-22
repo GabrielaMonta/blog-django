@@ -39,5 +39,10 @@
 </div>
 
 {% block name_a %}
-    <a href="{% url 'user:auth_register' %}" class="text-sm font-onest mt-8">¿Todavia no tienes cuenta? <span class="font-semibold underline">Registrate</span></a>
+    <div class="w-full flex justify-center mt-8">
+        <a href="{% url 'user:auth_register' %}" class="text-sm font-onest text-center">
+            ¿Todavía no tienes cuenta? 
+            <span class="font-semibold underline hover:text-[#03346E]">Regístrate</span> <!-- Cambia el color al pasar el mouse -->
+        </a>
+    </div>
 {% endblock name_a %}

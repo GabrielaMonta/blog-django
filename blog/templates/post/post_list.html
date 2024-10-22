@@ -2,48 +2,26 @@
 
 {% block title %}Post | BLOG FeCh{% endblock title %} 
 
-{% block content %} 
-    <div class="mb-4">
-        <form method="GET" class="flex flex-col sm:flex-row gap-4">
-            <div>
-                <label for="location" class="block text-white">Ubicación:</label>
-                <select name="location" id="location" class="p-2 rounded">
-                    <option value="">--Seleccionar ubicación--</option>
-                    {% for location in locations %}
-                        <option value="{{ location.id }}"{% if request.GET.location == location.id %} selected{% endif %}>{{ location.name }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-
-            <div>
-                <label for="category" class="block text-white">Categoría:</label>
-                <select name="category" id="category" class="p-2 rounded">
-                    <option value="">--Seleccionar categoría--</option>
-                    {% for category in categories %}
-                        <option value="{{ category.id }}"{% if request.GET.category == category.id %} selected{% endif %}>{{ category.title }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-
-            <div>
-                <label for="order_by" class="block text-white">Ordenar por:</label>
-                <select name="order_by" id="order_by" class="p-2 rounded">
-                    <option value="creation_date" {% if request.GET.order_by == "creation_date" %} selected{% endif %}>Fecha de creación</option>
-                    <option value="title" {% if request.GET.order_by == "title" %} selected{% endif %}>Título</option>
-                </select>
-            </div>
-
-            <button type="submit" class="bg-blue-500 text-white p-2 rounded">Filtrar y Ordenar</button>
-        </form>
+{% block content %}
+    <div class="sm:h-[150px] my-4 sm:mb-8">
+        {% include 'components/commons/searchBar.html' %}
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-16">
         {% if posts %}
          {% for post in posts %}
-             {% include 'components/ui/card.html' with title=post.title description=post.location date=post.creation_date allow_comments=post.allow_comments|yesno:"Si,No" user=post.author.username %}
+             {% include 'components/ui/card.html' with title=post.title description=post.location date=post.creation_date.date allow_comments=post.allow_comments|yesno:"Si,No" user=post.author.username %}
          {% endfor %}
         {% else %}
-            <p class="text-white">No hay posts disponibles.</p>
+            <div class="flex w-[300px] h-[50px] justify-center items-center p-4 text-md text-gray-800 rounded-lg  dark:text-gray-300" role="alert">
+              <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+              </svg>
+              <span class="sr-only">Info</span>
+              <div>
+                <span class="font-medium ">No hay posts realizados</span>
+              </div>
+            </div>
         {% endif %}
     </div>
 {% endblock content %}

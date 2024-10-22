@@ -11,6 +11,17 @@
     {% block extra_head_layout %}{% endblock extra_head_layout %}
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
+        document.addEventListener('click', function(event) {
+            const profileButton = document.getElementById('profileButton');
+            const profileDropdown = document.getElementById('profileDropdown');
+            if (profileButton.contains(event.target)) {
+                profileDropdown.classList.toggle('hidden');
+            } else {
+                profileDropdown.classList.add('hidden');
+            }
+        });
+    </script>
+    <script>
         tailwind.config = {
             theme: {
                 extend: {

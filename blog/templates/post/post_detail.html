@@ -57,11 +57,12 @@
                                     {# ACTUALIZAR COMMENT #}
                                     <form method="post" action="{% url 'post:comment_update' comment.id %}" class="max-w-md w-[395px] h-[210px] m-4 mx-auto bg-[#2f3d3c] text-white p-4 gap-4 rounded-lg shadow-md font-onest"> {% csrf_token %}
                                         <div class="flex items-center space-x-4">
-                                            {% if user_profile.avatar %}
+                                            <!-- {% if user_profile.avatar %}
                                                 <img class="w-8 h-8 rounded-full"  src="{{ user_profile.avatar.url }}" alt="Profile">
                                             {% else %}
                                                 <img class="w-8 h-8 rounded-full"  src="{{ MEDIA_URL }}user/default/avatar_default.jpg" alt="Default Profile">
-                                            {% endif %}
+                                            {% endif %} -->
+                                            <img class="w-8 h-8 rounded-full" src="{{ user.avatar.url }}" alt="Imagen del Usuario nro:{{user.id}}">
                                             <div>
                                                 <p class="font-bold">{{ name }}</p>
                                                 <p class="text-sm text-gray-400">{{ user }}</p>
@@ -94,21 +95,14 @@
                                             <span class="sr-only">Info</span>
                                             <h3 class="text-lg font-medium">¿Estás seguro de que deseas eliminar este comentario?</h3>
                                           </div>
-                                          <div class="flex m-4">
-                                            <button type="submit" class="text-white bg-red-800 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                                              Eliminar
-                                            </button>
-                                            <a href="{% url 'post:post_detail' post.slug %}" class="text-red-800 bg-transparent border border-red-800 hover:bg-red-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-red-600 dark:border-red-600 dark:text-red-500 dark:hover:text-white dark:focus:ring-red-800" data-dismiss-target="#alert-additional-content-2" aria-label="Close">
-                                              Cancelar
-                                            </a>
-                                          </div>
+                        
                                         </form>
                                     </div>
                                 {% else %}
                                     {# VER COMMENTS #}
                                     <div class="max-w-md w-[690px] h-[200px] m-4 mx-auto bg-[#2f3d3c] text-white p-4 rounded-lg shadow-md">
                                         <div class="flex items-center space-x-4">
-                                            <img src="https://via.placeholder.com/50" alt="Profile picture" class="w-12 h-12 rounded-full">
+                                            <img class="w-8 h-8 rounded-full" src="{{ comment.author.avatar.url }}" alt="Imagen del Usuario nro:{{comment.author.id}}">
                                             <div>
                                                 <p class="font-bold">{{ comment.author.username }}</p>
                                                 <p class="text-sm text-gray-400">@{{ comment.author.username }}</p>

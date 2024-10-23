@@ -37,28 +37,3 @@ if settings.DEBUG:
  urlpatterns += static(settings.MEDIA_URL,
                         document_root=settings.MEDIA_ROOT)
  
- '''
- from django.contrib import admin
-from django.urls import path, include
-from django.conf import settings
-from blog.views import IndexView, AboutView 
-from django.conf.urls.static import static
-
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', IndexView.as_view(), name='home'),
-    path('about/', AboutView.as_view(), name='about')
-    path('posts/', include('apps.post.urls', namespace='post')),
-    path('user/', include('apps.user.urls', namespace='user'))
-]
-
-if settings.DEBUG:
- from django.conf.urls.static import static
- # Sirviendo archivos estáticos
- urlpatterns += static(settings.STATIC_URL,
-                        document_root=settings.STATIC_ROOT)
- # Sirviendo archivos media
- urlpatterns += static(settings.MEDIA_URL,
-                        document_root=settings.MEDIA_ROOT)
- '''

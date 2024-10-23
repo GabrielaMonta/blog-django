@@ -4,6 +4,7 @@ from apps.user.forms import RegisterForm, LoginForm
 from django.contrib.auth.models import Group
 from django.urls import reverse_lazy
 from django.contrib.auth import login
+from django.conf import settings
 
 class UserProfileView(TemplateView):
     template_name = 'user/user_profile.html'
@@ -13,6 +14,8 @@ class UserProfileView(TemplateView):
         context = super().get_context_data(**kwargs)
         # Agrega el usuario actual al contexto
         context['user_profile'] = self.request.user
+        # Agrega MEDIA_URL al contexto
+        context['MEDIA_URL'] = settings.MEDIA_URL
         return context
     
 

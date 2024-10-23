@@ -1,29 +1,43 @@
-{% load static %}
+
 <article class="max-w-sm bg-gray-100 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 overflow-hidden font-onest p-2">
-  <div class="p-2">
-    <h2 class="text-lg font-bold text-white uppercase">{{ title }}</h2>
-  </div>
-  <img class="w-full h-56 object-cover rounded-lg" src="{% static 'media/user/Wall.png' %}" alt="logo">
-  <div class="mt-4 shadow dark:bg-gray-800 dark:border-gray-700 font-onest">
-    <div class="bg-[#34455d] p-4 rounded-lg shadow-lg">
-      <h3 class="text-md font-semibold text-white">{{ description }}</h3>
-      <p class="text-sm text-gray-300">{{ date }}</p>
+
+    <div class="p-2">
+        <h2 class="text-lg font-bold text-white uppercase">{{ title }}</h2>
     </div>
-  </div>
-  <div class="px-4 py-2 text-gray-500 flex justify-between text-sm">
-      <p>Comentarios {{ allow_comments }}</p>
-      <p class="text-sm text-teal-600">@{{ user }}</p>
-  </div>
+
+    <div>
+        {% if images %}
+            {% for image in images %}
+                <img src="{{ image.image.url }}" alt="Imagen del post" class="w-full h-56 object-cover rounded-lg">
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <div class="mt-4 shadow dark:bg-gray-800 dark:border-gray-700 font-onest">
+        <div class="bg-[#34455d] p-4 rounded-lg shadow-lg">
+            <h3 class="text-md font-semibold text-white">{{ location }}</h3>
+            <p class="text-sm text-gray-300">{{ date }}</p>
+        </div>
+    </div>
+
+    <div class="px-4 py-2 text-gray-500 flex justify-between text-sm">
+        <p>Comentarios {{ allow_comments }}</p>
+        <p class="text-sm text-teal-600">@{{ author }}</p>
+    </div>
+
     <div class="flex justify-end items-center gap-2 mt-2">
-        <a href="{% url 'post:post_detail' slug=post.slug %}" class="px-3 py-2 text-sm font-medium text-center justify-between gap-2 inline-flex items-center text-white bg-blue-900 rounded-lg hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-800 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 24" stroke-width="1.5" stroke="currentColor" class="size-4">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-            </svg>
-            Ver
-        </a>
-        <a href="{% url 'post:post_delete' slug=post.slug %}" class="mt-2 text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Eliminar</a>
+        {% if post.slug %}
+            <a href="{% url 'post:post_detail' slug=post.slug %}" class="px-3 py-2 text-sm font-medium text-center justify-between gap-2 inline-flex items-center text-white bg-blue-900 rounded-lg hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-800 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                </svg>
+                Ver
+            </a>
+            <a href="{% url 'post:post_delete' slug=post.slug %}" class="mt-2 text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Eliminar</a>
+        {% else %}
+            <p class="text-red-500">Slug no disponible</p>
+        {% endif %}
+        
     </div>
-
 </article>
-

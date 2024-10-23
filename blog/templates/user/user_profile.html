@@ -16,21 +16,35 @@
                     </div>
                 </div>
 
-                <div class="p-8 flex flex-col justify-center">
+                <div class="p-8 flex flex-col justify-center font-onest">
                     <p class="text-gray-600 text-lg mb-4">
-                        Usuario: {{ user_profile.username}}
+                        <span class="text-black text-lg font-bold">Usuario:</span> {{ user.username}}
                     </p>
                     <p class="text-gray-600 text-lg mb-4">
-                        Nombre: {{ user_profile.first_name }}
+                        <span class="text-black text-lg font-bold">Nombre:</span> {{ user.first_name }}
                     </p>
                     <p class="text-gray-600 mb-4">
-                        Apellido: {{ user_profile.last_name }}
+                        <span class="text-black text-lg font-bold">Apellido:</span> {{ user.last_name }}
                     </p>
                     <p class="text-gray-600 mb-4">
-                        Email: {{ user_profile.email }}
+                        <span class="text-black text-lg font-bold">Email:</span> {{ user.email }}
                     </p>
                     <p class="text-gray-600 mb-4">
-                        Tipo de usuario: {{ user_profile.role }}
+                        <span class="text-black text-lg font-bold">Creado:</span> {{ user.date_joined }}
+                    </p>
+                    {% if user.is_superuser == 1 %}
+                    	<p class="text-gray-600 mb-4">
+                            <span class="text-black text-lg font-bold">Tipo de usuario:</span> Superusuario
+                        </p>
+                    {% else %}
+                        <p class="text-gray-600 mb-4">
+                            <span class="text-black text-lg font-bold">Tipo de usuario:</span> Visitante
+                        </p>
+                    {% endif %} 
+                    
+                    
+                    <p class="text-gray-600 mb-4">
+                        <span class="text-black text-lg font-bold">Ultimo ingreso:</span> {{ user.last_login }}
                     </p>
 
                     <div class="flex space-x-4 mt-6">

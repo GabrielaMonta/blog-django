@@ -1,5 +1,5 @@
 
-<article class="max-w-sm bg-gray-100 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 overflow-hidden font-onest p-2">
+<article class="max-w-sm bg-gray-100 w-[320px] rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 overflow-hidden font-onest p-2">
 
     <div class="p-2">
         <h2 class="text-lg font-bold text-white uppercase">{{ title }}</h2>
@@ -8,7 +8,7 @@
     <div>
         {% if images %}
             {% for image in images %}
-                <img src="{{ image.image.url }}" alt="Imagen del post" class="w-full h-56 object-cover rounded-lg">
+                <img src="{{ image.image.url }}" alt="Imagen del post" class="w-[315px] h-56 object-cover rounded-lg">
             {% endfor %}
         {% endif %}
     </div>

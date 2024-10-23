@@ -16,15 +16,12 @@
                     </svg>
                 </a>
             </header>
-            <main class="grid grid-cols-2">
-                <h1>
-                    CARD POST
-                </h1>
-{#                {% if posts %}#}
-{#                     {% for post in posts %}#}
-{#                         {% include 'components/ui/card.html' with title=post.title images=post.images.all location=post.location date=post.creation_date.date allow_comments=post.allow_comments|yesno:"Si,No" author=post.author.username %}#}
-{#                     {% endfor %}#}
-{#                {% endif %}#}
+            <main class="grid grid-cols-3 gap-4 my-8">
+                {% if latest_post %}
+                     {% for post in latest_post %}
+                         {% include 'components/ui/card.html' with title=post.title images=post.images.all location=post.location date=post.creation_date.date allow_comments=post.allow_comments|yesno:"Si,No" author=post.author.username %}
+                     {% endfor %}
+                {% endif %}
             </main>
         </section>
     </main>

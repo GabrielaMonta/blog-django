@@ -9,7 +9,7 @@
                     {% if user_profile.avatar %}
                         <img class="w-full h-96 object-cover" src="{{ user_profile.avatar.url }}" alt="Profile Image">
                     {% else %}
-                        <img class="w-full h-96 object-cover" src="{{ MEDIA_URL }}user/default/avatar_default.png" alt="Default Profile Image">
+                        <img class="w-full h-96 object-cover" src="{{ MEDIA_URL }}user/default/avatar_default.jpg" alt="Default Profile Image">
                     {% endif %}
                     <div class="absolute bottom-0 left-0 right-0 bg-[#1b3030] text-center p-4">
                         <h2 class="text-white text-xl font-normal font-onest">Hola, <span class="text-white text-2xl font-bold font-onest">{{ user_profile.username }}</span></h2>

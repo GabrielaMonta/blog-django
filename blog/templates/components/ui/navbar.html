@@ -13,7 +13,11 @@
         {% if user.is_authenticated %}
             <div class="relative inline-block text-left">
                 <button id="profileButton" type="button" class="inline-flex justify-center items-center w-full rounded-full px-4 py-2 bg-[#17153B] font-normal font-onest text-white  focus:outline-none">
-                    <img class="w-8 h-8 rounded-full" src="https://via.placeholder.com/40" alt="Profile">
+                    {% if user_profile.avatar %}
+                        <img class="w-8 h-8 rounded-full"  src="{{ user_profile.avatar.url }}" alt="Profile">
+                    {% else %}
+                        <img class="w-8 h-8 rounded-full"  src="{{ MEDIA_URL }}user/default/avatar_default.png" alt="Default Profile">
+                    {% endif %}
                     <span class="ml-2 text-lg ">@ {{ user.username }}</span>
                 </button>
                 <div id="profileDropdown" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white font-onest ring-1 ring-black ring-opacity-5 focus:outline-none hidden">

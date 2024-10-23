@@ -1,6 +1,5 @@
 {% extends 'layouts/post_layout.html' %} 
-
-{% block title %}Post | BLOG FeCh{% endblock title %} 
+{% block title %}Posts | FeCh{% endblock title %}
 
 {% block content %}
     <div class="sm:h-[150px] my-4 sm:mb-8">
@@ -9,9 +8,9 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-16">
         {% if posts %}
-         {% for post in posts %}
-             {% include 'components/ui/card.html' with title=post.title description=post.location date=post.creation_date.date allow_comments=post.allow_comments|yesno:"Si,No" user=post.author.username %}
-         {% endfor %}
+             {% for post in posts %}
+                 {% include 'components/ui/card.html' with title=post.title images=post.images.all location=post.location date=post.creation_date.date allow_comments=post.allow_comments|yesno:"Si,No" author=post.author.username %}
+             {% endfor %}
         {% else %}
             <div class="flex w-[300px] h-[50px] justify-center items-center p-4 text-md text-gray-800 rounded-lg  dark:text-gray-300" role="alert">
               <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">

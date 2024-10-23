@@ -1,12 +1,32 @@
 {% extends 'layouts/index_layout.html' %}
 
 {% block title %}
-	FeCH | Inicio
+	Inicio | FeCH 
 {% endblock %}
 {% block content %}
-    <main class="grid gap-4 h-screen max-w-5xl">
+    <main class="grid gap-4 max-w-5xl">
         {%  include 'components/ui/description.html' %}
-        <h1 class="">section post</h1>
+        <section class="my-8">
+            <header class="flex justify-between ">
+                <h1 class="text-4xl font-slackey text-white sm:flex sm:justify-center sm:items-center">Ultimos eventos</h1>
+                <a href="/" class="flex justify-between gap-4">
+                    <div class="font-onest font-regular text-md text-white">ver todos </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="size-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+                    </svg>
+                </a>
+            </header>
+            <main class="grid grid-cols-2">
+                <h1>
+                    CARD POST
+                </h1>
+{#                {% if posts %}#}
+{#                     {% for post in posts %}#}
+{#                         {% include 'components/ui/card.html' with title=post.title images=post.images.all location=post.location date=post.creation_date.date allow_comments=post.allow_comments|yesno:"Si,No" author=post.author.username %}#}
+{#                     {% endfor %}#}
+{#                {% endif %}#}
+            </main>
+        </section>
     </main>
 {% endblock %}
 

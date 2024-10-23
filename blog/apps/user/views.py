@@ -38,6 +38,12 @@ class RegisterView(CreateView):
     def form_invalid(self, form):
         # Aquí puedes manejar la lógica cuando el formulario es inválido
         return super().form_invalid(form)  # Esto volverá a mostrar el formulario con errores
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['color_bg_form'] = 'bg-[#3D190C]'
+        context['color_bg'] = 'bg-[#DCA278]'
+        return context
     
 
 class LoginView(LoginViewDjango):
@@ -46,6 +52,13 @@ class LoginView(LoginViewDjango):
 
     def get_success_url(self):
         return reverse_lazy('home')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['color_bg_form'] = 'bg-[#451121]'
+        context['color_bg'] = 'bg-[#DCA278]'
+        return context
+
 
 
 class LogoutView(LogoutViewDjango):

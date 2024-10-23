@@ -35,7 +35,7 @@
                 <div class="w-full lg:w-3/4 mx-auto mb-6">
                      {% if active_images %}
                         {% for image in active_images %}
-                            <img src="{{ image.image.url }}" alt="Portada del post" class="w-[1100px] h-[500px] object-cover aspect-[16/9]" />
+                            <img src="{{ image.image.url }}" alt="Portada del post" class="w-[1100px] h-[500px] object-cover rounded-lg aspect-[16/9]" />
                         {% endfor %}
                     {% endif %}
                 </div>

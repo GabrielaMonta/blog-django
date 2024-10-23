@@ -1,9 +1,7 @@
 {% extends 'layouts/post_layout.html' %}
 
 {% block title_layout %}
-	{% block title %}
-		Post | FeCH
-	{% endblock %}
+	{% block title %}FeCH | Post{% endblock %}
 {% endblock %}
 
 {% block content_layout %}
@@ -60,10 +58,10 @@
                                     <form method="post" action="{% url 'post:comment_update' comment.id %}" class="max-w-md w-[395px] h-[210px] m-4 mx-auto bg-[#2f3d3c] text-white p-4 gap-4 rounded-lg shadow-md font-onest"> {% csrf_token %}
                                         <div class="flex items-center space-x-4">
                                             {% if user_profile.avatar %}
-                                                <img class="w-8 h-8 rounded-full" src="{{ user_profile.avatar.url }}" alt="Profile">
+                                                <img class="w-8 h-8 rounded-full"  src="{{ user_profile.avatar.url }}" alt="Profile">
                                             {% else %}
-                                                <img class="w-8 h-8 rounded-full" src="{{ MEDIA_URL }}media/user/default/avatar_default.jpg" alt="Default Profile">
-                                             {% endif %}
+                                                <img class="w-8 h-8 rounded-full"  src="{{ MEDIA_URL }}user/default/avatar_default.jpg" alt="Default Profile">
+                                            {% endif %}
                                             <div>
                                                 <p class="font-bold">{{ name }}</p>
                                                 <p class="text-sm text-gray-400">{{ user }}</p>

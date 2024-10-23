@@ -1,16 +1,14 @@
 {% extends 'layouts/post_layout.html' %}
 
 {% block title_layout %}
-	{% block title %}
-		Post | FeCH
-	{% endblock %}
+	{% block title %}FeCH | Post{% endblock %}
 {% endblock %}
 
 {% block content_layout %}
     <div class="grid grid-rows-[96px_1fr_56px] min-h-screen">
         {% include 'components/commons/header.html' %}
-        <section class="grid gap-4">
-            <div class="flex justify-end max-w-7xl items-center gap-2 mt-2">
+        <section class="grid gap-4 mx-auto">
+            <div class="flex justify-end max-w-7xl items-center gap-2 mt-2 sm:mx-8">
                 <a href="{% url 'post:post_update' slug=post.slug %}" class="px-3 py-2 text-sm font-medium text-center justify-between gap-2 inline-flex items-center text-white bg-green-900 rounded-lg hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-800 dark:hover:bg-green-700 dark:focus:ring-green-800">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                       <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
@@ -60,10 +58,10 @@
                                     <form method="post" action="{% url 'post:comment_update' comment.id %}" class="max-w-md w-[395px] h-[210px] m-4 mx-auto bg-[#2f3d3c] text-white p-4 gap-4 rounded-lg shadow-md font-onest"> {% csrf_token %}
                                         <div class="flex items-center space-x-4">
                                             {% if user_profile.avatar %}
-                                                <img class="w-8 h-8 rounded-full" src="{{ user_profile.avatar.url }}" alt="Profile">
+                                                <img class="w-8 h-8 rounded-full"  src="{{ user_profile.avatar.url }}" alt="Profile">
                                             {% else %}
-                                                <img class="w-8 h-8 rounded-full" src="{{ MEDIA_URL }}media/user/default/avatar_default.jpg" alt="Default Profile">
-                                             {% endif %}
+                                                <img class="w-8 h-8 rounded-full"  src="{{ MEDIA_URL }}user/default/avatar_default.jpg" alt="Default Profile">
+                                            {% endif %}
                                             <div>
                                                 <p class="font-bold">{{ name }}</p>
                                                 <p class="text-sm text-gray-400">{{ user }}</p>
@@ -148,12 +146,12 @@
                     </aside>
                 {% endif %}
             </main>
-            <section>
+            <section class="my-8">
                 {% if user.is_authenticated %}
                     <h2 class="text-start text-xl lg:text-md mb-8 max-w-3xl mx-auto gap-2 font-onest font-normal text-white">Agregar comentario</h2>
                     {% include 'components/ui/cardAddComment.html' with comment=add_comment_form.content%}
                 {% else %}
-                    <div class="grid place-items-center gap-4 text-sm font-onest">
+                    <div class="grid place-items-center gap-4 text-sm font-onest text-slate-300">
                         <header>
                             <p>
                                 ¿Quieres contarnos tu experiencia?
@@ -162,8 +160,8 @@
                                 Accede a tu cuenta para realizar tu comentario
                             </p>
                         </header>
-                        <a href="{% url 'user:auth_login' %}?next={{ request.path }}" class="hover:text-blue-500 underline text-lg font-bold">
-                            Inicia sesión
+                        <a href="{% url 'user:auth_login' %}?next={{ request.path }}" class="hover:text-blue-500 underline text-2xl font-bold text-white">
+                            Iniciar sesión
                         </a>
                     </div>
                 {% endif %}

@@ -1,13 +1,13 @@
 {% extends 'layouts/post_layout.html' %}  
 
-{% block title %}Crear Post | FeCh{% endblock title %} 
+{% block title %}Fech | Post{% endblock title %} 
 
 {% block content %} 
 
 
     <h2>Crear nuevo post</h2>
     <form method="post" enctype="multipart/form-data"> 
-    {% csrf_token %} 
+        {% csrf_token %} 
         <div class="flex flex-col gap-4"> 
             <p class="flex flex-col">{{ form.title.label_tag }} {{ form.title }}</p> 
             <p class="flex flex-col"> 

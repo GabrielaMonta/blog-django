@@ -6,14 +6,21 @@
     <main class="container mx-auto my-16">
             <div class="bg-white shadow-lg rounded-lg overflow-hidden max-w-4xl mx-auto w-full grid grid-cols-1 md:grid-cols-2">
                 <div class="relative">
-                    <img class="w-full h-96 object-cover" src="https://via.placeholder.com/40" alt="Profile Image">
+                    {% if user_profile.avatar %}
+                        <img class="w-full h-96 object-cover" src="{{ user_profile.avatar.url }}" alt="Profile Image">
+                    {% else %}
+                        <img class="w-full h-96 object-cover" src="{{ MEDIA_URL }}/user/default/avatar_default.jpg" alt="Profile Image">
+                    {% endif %}
                     <div class="absolute bottom-0 left-0 right-0 bg-[#1b3030] text-center p-4">
                         <h2 class="text-white text-xl font-normal font-onest">Hola, <span class="text-white text-2xl font-bold font-onest">{{ user_profile.username }}</span></h2>
                     </div>
                 </div>
 
                 <div class="p-8 flex flex-col justify-center">
-                    <p class="text-gray-700 text-lg mb-4">
+                    <p class="text-gray-600 text-lg mb-4">
+                        Usuario: {{ user_profile.username}}
+                    </p>
+                    <p class="text-gray-600 text-lg mb-4">
                         Nombre: {{ user_profile.first_name }}
                     </p>
                     <p class="text-gray-600 mb-4">

@@ -24,8 +24,8 @@ class Post(models.Model):
         if not self.slug:
             self.slug = self.generate_unique_slug()
         super().save(*args, **kwargs)
-        if not self.images.exists():
-            PostImage.objects.create(post=self, image='post/default/post_default.png')
+        #if not self.images.exists():
+        #   PostImage.objects.create(post=self, image='post/default/post_default.png')
 
     def generate_unique_slug(self):
         # tenemos este titulo para el post
@@ -84,7 +84,7 @@ def get_image_filename(instance, filename):
 class PostImage(models.Model):
     post = models.ForeignKey(
         Post, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to=get_image_filename, default='post/default/post_default.png')
+    image = models.ImageField(upload_to=get_image_filename, default=settings.DEFAULT_POST_IMAGE)
     active = models.BooleanField(default=True)
 
     def __str__(self):

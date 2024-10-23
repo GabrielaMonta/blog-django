@@ -32,35 +32,35 @@ def create_groups_and_permissions(sender, instance, created, **kwargs):
 
             # CREAR GRUPO USUARIOS REGISTRADOS
             registered_group, created = Group.objects.get_or_create(
-            name='Registered')
+                name='Registered')
             registered_group.permissions.add(
-            view_post_permission,
-            view_comment_permission,
-            add_comment_permission,
-            change_comment_permission,
-            delete_comment_permission,
+                view_post_permission,
+                view_comment_permission,
+                add_comment_permission,
+                change_comment_permission,
+                delete_comment_permission,
             )
 
             # CREAR GRUPO USUARIOS COLABORADORES
-            registered_group, created = Group.objects.get_or_create(
-            name='Collaborators')
-            registered_group.permissions.add(
-            view_post_permission,
-            add_post_permission,
-            change_post_permission,
-            delete_post_permission,
-            view_comment_permission,
-            add_comment_permission,
-            change_comment_permission,
-            delete_comment_permission,
+            collaborators_group, created = Group.objects.get_or_create(
+                name='Collaborators')
+            collaborators_group.permissions.add(
+                view_post_permission,
+                add_post_permission,
+                change_post_permission,
+                delete_post_permission,
+                view_comment_permission,
+                add_comment_permission,
+                change_comment_permission,
+                delete_comment_permission,
             )
 
             # CREAR GRUPO USUARIOS ADMINISTRADORES(HEAVY)
-            registered_group, created = Group.objects.get_or_create(
+            admin_group, created = Group.objects.get_or_create(
             name='Admins')
-            registered_group.permissions.set(Permission.objects.all())
+            admin_group.permissions.set(Permission.objects.all())
             print("Se crearon los grupos y permisos")
         except ContentType.DoesNotExist:
-            print('El tipo de conetenido aun no esta disponible.')
+            print('El tipo de contenido aun no esta disponible.')
         except Permission.DoesNotExist:
-            print('Uno o mas permisio no estan disponible aun.')
+            print('Uno o mas permisos no estan disponible aun.')

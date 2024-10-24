@@ -23,8 +23,8 @@
             </div>
             <div>
                 <select name="order_by" id="order_by" class="block font-onest py-2.5 px-0 w-full text-lg text-white appearance-none bg-transparent border-0 border-b-2 border-white dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer cursor-pointer">
-                    <option value="creation_date" {% if request.GET.order_by == "creation_date" %} selected{% endif %} class="text-black text-sm">Menos reciente</option>
                     <option value="-creation_date" {% if request.GET.order_by == "-creation_date" %} selected{% endif %} class="text-black text-sm">Mas reciente</option>
+                    <option value="creation_date" {% if request.GET.order_by == "creation_date" %} selected{% endif %} class="text-black text-sm">Menos reciente</option>
                     <option value="title" {% if request.GET.order_by == "title" %} selected{% endif %} class="text-black text-sm">Título (A-Z)</option>
                     <option value="-title" {% if request.GET.order_by == "-title" %} selected{% endif %} class="text-black text-sm">Título (Z-A)</option>
                 </select>

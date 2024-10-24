@@ -14,8 +14,9 @@
                   {{ post.title }}
                 </h1>
                 <p class="text-center text-md lg:text-lg mb-6 text-gray-300 font-regular">
-                  {{ post.location }} | {{ post.creation_date.date }}
+                    {{ post.category }} | {{ post.location }} | {{ post.creation_date.date }}
                 </p>
+                
 
                 <div class="w-full lg:w-4/5 mx-auto mb-6">
                     {% if active_images %}

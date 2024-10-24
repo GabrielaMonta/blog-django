@@ -102,7 +102,7 @@ class PostDetailView(DetailView):
                 context['deleting_comment_id'] = None
         return context
 
-#Actualizar post
+# Actualizar post 
 class PostUpdateView(UpdateView): 
     model = Post 
     form_class = UpdatePostForm 
@@ -112,13 +112,13 @@ class PostUpdateView(UpdateView):
         kwargs = super().get_form_kwargs() 
         kwargs['active_images'] = self.get_object().images.filter(active=True)  # Pasamos las imágenes activas 
         return kwargs 
-    
+
     def form_valid(self, form): 
         post = form.save(commit=False) 
         active_images = form.active_images 
         keep_any_image_active = False 
-    
-    # Manejo de las imágenes activas 
+
+        # Manejo de las imágenes activas 
         if active_images: 
             for image in active_images: 
                 field_name = f"keep_image_{image.id}" 
@@ -129,22 +129,24 @@ class PostUpdateView(UpdateView):
                 else: 
                     keep_any_image_active = True 
 
-    # Manejo de las nuevas imágenes subidas 
+        # Manejo de las nuevas imágenes subidas 
         images = self.request.FILES.getlist('images') 
         if images: 
             for image in images: 
-                    PostImage.objects.create(post=post, image=image) 
+                PostImage.objects.create(post=post, image=image) 
 
-    # Si no se desea mantener ninguna imagen activa y no se subieron nuevas imágenes, 
-    # se agrega una imagen por defecto 
+        # Si no se desea mantener ninguna imagen activa y no se subieron nuevas imágenes, 
+        # se agrega una imagen por defecto 
         if not keep_any_image_active and not images: 
-            PostImage.objects.create( 
-                post=post, image=settings.DEFAULT_POST_IMAGE) 
-            post.save()  # Guardar el post finalmente 
-            return super().form_valid(form) 
-    
+            PostImage.objects.create(post=post, image=settings.DEFAULT_POST_IMAGE) 
+
+        post.save()  # Guardar el post finalmente
+
+        return super().form_valid(form)
+
+    # Este método redirige al detalle del post usando su slug después de actualizar el post
     def get_success_url(self): 
-    #El reverse_lazy es para que no se ejecute hasta que se haya guardado el post 
+        # El reverse_lazy es para que no se ejecute hasta que se haya guardado el post 
         return reverse_lazy('post:post_detail', kwargs={'slug': self.object.slug})
 
 #Eliminar posts

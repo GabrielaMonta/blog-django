@@ -21,6 +21,7 @@ class User(AbstractUser):
     @property 
     def is_collaborator(self): 
         return self.groups.filter(name='Collaborators').exists() 
+    
     @property 
     def is_admin(self): 
         return self.groups.filter(name='Admins').exists() 
@@ -28,3 +29,16 @@ class User(AbstractUser):
     @property 
     def is_registered(self): 
         return self.groups.filter(name='Registered').exists() 
+    
+    @property
+    def role(self):
+        if self.is_superuser:
+            return 'Superadmin'
+        elif self.is_admin:
+            return 'Administrador'
+        elif self.is_collaborator:
+            return 'Colaborador'
+        elif self.is_registered:
+            return 'Registrado'
+        else:
+            return 'Visitante'

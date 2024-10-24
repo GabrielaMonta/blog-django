@@ -1,10 +1,10 @@
-from django.views.generic import TemplateView, CreateView
+from django.views.generic import TemplateView, CreateView, UpdateView
 from django.contrib.auth.views import LoginView as LoginViewDjango, LogoutView as LogoutViewDjango
-from apps.user.forms import RegisterForm, LoginForm
+from apps.user.forms import RegisterForm, LoginForm, UpdateUserForm
 from django.contrib.auth.models import Group
 from django.urls import reverse_lazy
-from django.contrib.auth import login
 from django.conf import settings
+from apps.user.models import User
 
 class UserProfileView(TemplateView):
     template_name = 'user/user_profile.html'
@@ -63,7 +63,16 @@ class LoginView(LoginViewDjango):
         return context
 
 
-
 class LogoutView(LogoutViewDjango):
     def get_success_url(self):
         return reverse_lazy('home')
+    
+
+class UserUpdateView(UpdateView):
+    template_name = 'user/user_update.html'
+    model = User
+    form_class = UpdateUserForm
+    success_url = reverse_lazy('user:user_profile')  # Redirige al perfil después de la actualización
+
+    def get_object(self):
+        return self.request.user 

@@ -1,0 +1,70 @@
+{% extends 'layouts/user_layout.html' %}
+
+{% block title %}Perfil de Usuario{% endblock %}
+
+{% block content %}
+<main class="container mx-auto my-16">
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden max-w-4xl mx-auto w-full grid grid-cols-1 md:grid-cols-2">
+        <div class="relative">
+            {% if user.avatar %}
+                <img class="w-full h-96 object-cover" src="{{ user.avatar.url }}" alt="Profile Image">
+            {% else %}
+                <img class="w-full h-96 object-cover" src="{{ MEDIA_URL }}user/default/avatar_default.jpg" alt="Default Profile Image">
+            {% endif %}
+            <div class="absolute bottom-0 left-0 right-0 bg-[#1b3030] text-center p-4">
+                <h2 class="text-white text-xl font-normal font-onest">
+                    Hola, <span class="text-white text-2xl font-bold font-onest">{{ user.username }}</span>
+                </h2>
+            </div>
+        </div>
+
+        <div class="p-8 flex flex-col justify-center font-onest">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <!-- Campo Usuario (no editable) -->
+                <p class="text-gray-600 text-lg mb-4">
+                    <span class="text-black text-lg font-bold">Usuario:</span> {{ user.username }}
+                </p>
+
+                <!-- Campo Nombre -->
+                <div class="text-gray-600 text-lg mb-4">
+                    <label class="block text-black text-lg font-bold mb-2" for="first_name">Nombre:</label>
+                    {{ form.first_name }}
+                </div>
+
+                <!-- Campo Apellido -->
+                <div class="text-gray-600 text-lg mb-4">
+                    <label class="block text-black text-lg font-bold mb-2" for="last_name">Apellido:</label>
+                   {{ form.last_name }}
+                </div>
+
+                <!-- Campo Email -->
+                <div class="text-gray-600 text-lg mb-4">
+                    <label class="block text-black text-lg font-bold mb-2" for="email">Email:</label>
+                    {{ form.email }}
+                </div>
+
+                <!-- Mostrar otros datos -->
+                <p class="text-gray-600 mb-4">
+                    <span class="text-black text-lg font-bold">Creado:</span> {{ user.date_joined }}
+                </p>
+                
+                <p class="text-gray-600 mb-4">
+                    <span class="text-black text-lg font-bold">Ultimo ingreso:</span> {{ user.last_login }}
+                </p>
+
+                <!-- Botón para enviar los cambios -->
+                <div class="flex space-x-4 mt-6">
+                    <button type="submit" class="px-3 py-2 text-sm font-medium text-center justify-between gap-2 inline-flex items-center text-white bg-blue-900 rounded-lg hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-800 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+                        </svg>
+                        Guardar Cambios
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock %}

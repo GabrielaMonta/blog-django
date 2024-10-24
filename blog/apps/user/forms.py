@@ -9,15 +9,10 @@ class RegisterForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super(RegisterForm, self).__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.update({
-            'class': 'mt-1 block w-full p-2 border border-gray-300 rounded-md bg-white text-black'
-        })
-        self.fields['password1'].widget.attrs.update({
-            'class': 'mt-1 block w-full p-2 border border-gray-300 rounded-md bg-white text-black'
-        })
-        self.fields['password2'].widget.attrs.update({
-            'class': 'mt-1 block w-full p-2 border border-gray-300 rounded-md bg-white text-black'     
-    })
+        for field_name in ['username', 'password1', 'password2']:
+            self.fields[field_name].widget.attrs.update({
+                'class': 'mt-1 block w-full p-2 border border-gray-300 rounded-md bg-white text-black'
+            })
 
 class LoginForm(AuthenticationForm):
     username = forms.CharField(
@@ -41,4 +36,12 @@ class LoginForm(AuthenticationForm):
         self.fields['password'].widget.attrs.update({
             'class': 'mt-1 block w-full p-2 border border-gray-300 rounded-md bg-white text-black'
         })
+
+
+class UpdateUserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email', 'avatar'] 
+       
+    
 

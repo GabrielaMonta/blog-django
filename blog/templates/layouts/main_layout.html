@@ -21,6 +21,44 @@
             }
         });
     </script>
+   <script>
+      function checkWindowSize() {
+        const isMobile = window.innerWidth <= 1360;
+        toggleMenus(isMobile);
+      }
+
+      function toggleMenus(isMobile) {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const desktopMenu = document.getElementById('desktop-menu');
+        const hamburger = document.getElementById('hamburger');
+    
+        if (isMobile) {
+          hamburger.classList.remove('hidden');
+          desktopMenu.classList.add('hidden');
+          mobileMenu.classList.add('hidden');
+        } else {
+          hamburger.classList.add('hidden');
+          mobileMenu.classList.add('hidden');
+          desktopMenu.classList.remove('hidden');
+        }
+      }
+
+      function handleHamburgerClick() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenu.classList.toggle('hidden'); 
+      }
+
+      function initMenu() {
+        const hamburger = document.getElementById('hamburger');
+          
+        hamburger.addEventListener('click', handleHamburgerClick);
+          
+        window.addEventListener('resize', checkWindowSize);
+
+        checkWindowSize();
+      }
+      window.onload = initMenu;
+   </script>
     <script>
         tailwind.config = {
             theme: {

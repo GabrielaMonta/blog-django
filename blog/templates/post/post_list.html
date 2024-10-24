@@ -6,7 +6,7 @@
         {% include 'components/commons/searchBar.html' %}
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-16">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-16">
         {% if posts %}
              {% for post in posts %}
                  {% include 'components/ui/card.html' with title=post.title images=post.images.all location=post.location date=post.creation_date.date allow_comments=post.allow_comments|yesno:"Si,No" author=post.author.username comments_count=post.comments.count %}

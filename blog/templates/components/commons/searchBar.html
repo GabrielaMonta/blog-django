@@ -24,7 +24,8 @@
             <div>
                 <select name="order_by" id="order_by" class="block font-onest py-2.5 px-0 w-full text-lg text-white appearance-none bg-transparent border-0 border-b-2 border-white dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer cursor-pointer">
                     <option value="creation_date" {% if request.GET.order_by == "creation_date" %} selected{% endif %} class="text-black text-sm sm:text-xs">Fecha de creación</option>
-                    <option value="title" {% if request.GET.order_by == "title" %} selected{% endif %} class="text-black text-sm">Título</option>
+                    <option value="title" {% if request.GET.order_by == "title" %} selected{% endif %} class="text-black text-sm">Título (A-Z)</option>
+                    <option value="-title" {% if request.GET.order_by == "-title" %} selected{% endif %} class="text-black text-sm">Título (Z-A)</option>
                 </select>
             </div>
             <button type="submit" class="py-2.5 px-5 m-2 uppercase text-lg font-onest font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-600 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Aplicar</button>

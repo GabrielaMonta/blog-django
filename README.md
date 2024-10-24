@@ -5,6 +5,10 @@ Este proyecto es un blog dedicado a la promoción y difusión de eventos provinc
 ## Objetivo
 El blog busca promover la cultura y las actividades sociales en el Chaco, incentivando la participación de la comunidad en eventos que enriquecen la vida provincial. Al ser una plataforma accesible y fácil de usar, pretende conectar a los ciudadanos con las iniciativas locales, fomentar el turismo interno y fortalecer el tejido social de la región.
 
+## Idea Original del proyecto
+
+## Deploy link
+
 ## Estructura del proyecto
 ESTRUCTURA DEL PROYECTO
 
@@ -111,3 +115,7 @@ ESTRUCTURA DEL PROYECTO
 └── ...
 ```
 
+## Desarrolladores
+JUDKEVICH, Natasha                email: njudkevich@gmail.com
+MONTANARO, Gabriela Antonella     email: gabrielaam201@gmail.com
+PAEZ, Benjamin                    email:

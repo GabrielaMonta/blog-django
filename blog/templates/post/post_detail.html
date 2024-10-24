@@ -29,8 +29,9 @@
                       {{ post.content }}
                     </p>
                 </section>
-                
-                {% if user.is_authenticated and post.author or user.is_collaborator or user.is_admin %}
+            
+            
+                {% if user.is_collaborator and post.author == user or user.is_admin %}
                     <div class="flex justify-center max-w-7xl items-center gap-2 mt-2 sm:mx-8">
                         <a href="{% url 'post:post_update' slug=post.slug %}" class="px-3 py-2 text-sm font-medium text-center justify-between gap-2 inline-flex items-center text-white bg-green-900 rounded-lg hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-800 dark:hover:bg-green-700 dark:focus:ring-green-800">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -148,7 +149,7 @@
                 {% endif %}
             </main>
             <section class="my-2">
-                {% if user.is_authenticated or comment.author or user.is_collaborator or user.is_admin%}
+                {% if user.is_authenticated or user.is_collaborator or user.is_admin%}
                     <h2 class="text-start text-xl lg:text-md mb-8 max-w-3xl mx-auto gap-2 font-onest font-normal text-white">Agregar comentario</h2>
                     {% include 'components/ui/cardAddComment.html' with comment=add_comment_form.content%}
                 {% else %}

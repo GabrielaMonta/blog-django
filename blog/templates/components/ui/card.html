@@ -5,13 +5,73 @@
         <h2 class="font-slackey text-[#ffad60] uppercase">{{ title }}</h2>
     </div>
 
-    <div>
+
+    <!-- Aca empieza mi carrucel  -->
+    <div class="relative w-full">
         {% if images %}
-            {% for image in images %}
-                <img src="{{ image.image.url }}" alt="Imagen del post" class="w-[315px] h-56 object-cover rounded-lg">
-            {% endfor %}
+            {% if images|length == 1 %}
+                <!-- Mostrar solo una imagen si hay una sola -->
+                <img src="{{ images.0.image.url }}" alt="Imagen del post" class="w-full h-56 object-cover rounded-lg">
+            {% else %}
+                <!-- Carrusel para múltiples imágenes -->
+                <div class="flex overflow-hidden">
+                    {% for image in images %}
+                        <div class="flex-none w-full transition-transform duration-700 ease-in-out transform" 
+                             style="display: none;" 
+                             id="slide-{{ forloop.counter }}">
+                            <img src="{{ image.image.url }}" alt="Imagen del post" class="w-full h-56 object-cover rounded-lg">
+                        </div>
+                    {% endfor %}
+                </div>
+    
+                <button id="prev" class="absolute top-1/2 left-0 z-10 p-2 text-white bg-black rounded-full transform -translate-y-1/2 hover:bg-gray-700">
+                    &#10094;
+                </button>
+                <button id="next" class="absolute top-1/2 right-0 z-10 p-2 text-white bg-black rounded-full transform -translate-y-1/2 hover:bg-gray-700">
+                    &#10095;
+                </button>
+            {% endif %}
         {% endif %}
     </div>
+    
+    <script>
+        let currentSlide = 1;
+        const totalSlides = {{ images|length }};
+        
+        // Solo ejecutar el carrusel si hay más de una imagen
+        if (totalSlides > 1) {
+            const showSlide = (index) => {
+                const slides = document.querySelectorAll('[id^="slide-"]');
+                slides.forEach((slide, i) => {
+                    slide.style.display = (i + 1 === index) ? 'block' : 'none';
+                });
+            };
+            
+            showSlide(currentSlide);
+    
+            document.getElementById('next').addEventListener('click', () => {
+                currentSlide = currentSlide < totalSlides ? currentSlide + 1 : 1;
+                showSlide(currentSlide);
+            });
+    
+            document.getElementById('prev').addEventListener('click', () => {
+                currentSlide = currentSlide > 1 ? currentSlide - 1 : totalSlides;
+                showSlide(currentSlide);
+            });
+        }
+    
+        // Función para reiniciar el carrusel
+        function resetCarousel() {
+            currentSlide = 1;
+            if (totalSlides > 1) {
+                showSlide(currentSlide);
+            }
+        }
+    
+        // Listener para reiniciar el carrusel después de agregar una nueva imagen
+        document.addEventListener('DOMContentLoaded', resetCarousel);
+    </script>
+      <!-- Aca termina mi carrucel  -->
 
     <div class="mt-4 shadow dark:bg-gray-800 dark:border-gray-700 font-onest">
         <div class="bg-[#34455d] p-4 rounded-lg shadow-lg">
@@ -49,7 +109,7 @@
                 </svg>
                 Ver
             </a>
-            {% if user.is_admin or user.is_collaborator %}
+            {% if user.is_collaborator and post.author == user or user.is_admin %}
                 <a href="{% url 'post:post_update' slug=post.slug %}" 
                 class="mt-2 text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-900">
                 Editar</a>

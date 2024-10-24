@@ -5,6 +5,7 @@ from django.urls import reverse, reverse_lazy
 from django.conf import settings 
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.db.models.functions import Lower
 
 #Listar posts
 class PostListView(ListView): 
@@ -23,13 +24,19 @@ class PostListView(ListView):
             queryset = queryset.filter(location_id=location_id)
         if category_id:
             queryset = queryset.filter(category_id=category_id)
-        if query:  # Si se ingresa un término de búsqueda
+        if query:
             queryset = queryset.filter(title__icontains=query)
 
-        if order_by:
+        # Cambiar el orden predeterminado a alfabético por título
+        if order_by == 'title' or order_by == '-title':
+            # Si se ordena por título, usamos la anotación para aplicar `Lower`
+            queryset = queryset.annotate(lower_title=Lower('title')).order_by('lower_title' if order_by == 'title' else '-lower_title')
+        elif order_by:
+            # Si se selecciona otro criterio de ordenación
             queryset = queryset.order_by(order_by)
         else:
-            queryset = queryset.order_by('-creation_date')  # Ordenar por fecha de creación por defecto
+            # Predeterminado: ordenar por fecha de creación más reciente
+            queryset = queryset.order_by('-creation_date')
 
         return queryset
 

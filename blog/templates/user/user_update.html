@@ -28,31 +28,29 @@
                 </p>
 
                 <!-- Campo Nombre -->
-                <div class="text-gray-600 text-lg mb-4">
-                    <label class="block text-black text-lg font-bold mb-2" for="first_name">Nombre:</label>
+                <div class="flex items-center mb-2">
+                    <label for="first_name" class="block text-black text-lg font-bold mr-2">Nombre:</label>                    
                     {{ form.first_name }}
+
                 </div>
 
                 <!-- Campo Apellido -->
-                <div class="text-gray-600 text-lg mb-4">
-                    <label class="block text-black text-lg font-bold mb-2" for="last_name">Apellido:</label>
-                   {{ form.last_name }}
+                <div class="flex items-center mb-2">
+                    <label for="last_name" class="block text-black text-lg font-bold mr-2">Apellido:</label>
+                    {{ form.last_name }}
+                
                 </div>
 
                 <!-- Campo Email -->
-                <div class="text-gray-600 text-lg mb-4">
-                    <label class="block text-black text-lg font-bold mb-2" for="email">Email:</label>
-                    {{ form.email }}
+                <div class="flex items-center mb-2">
+                    <label for="email" class="block text-black text-lg font-bold mr-2">Email:</label>
+                        {{ form.email }}
                 </div>
 
-                <!-- Mostrar otros datos -->
-                <p class="text-gray-600 mb-4">
-                    <span class="text-black text-lg font-bold">Creado:</span> {{ user.date_joined }}
-                </p>
-                
-                <p class="text-gray-600 mb-4">
-                    <span class="text-black text-lg font-bold">Ultimo ingreso:</span> {{ user.last_login }}
-                </p>
+                <div class="mb-4">
+                    <label class="block text-black text-lg font-bold mb-2" for="avatar">Cambiar Avatar:</label>
+                    {{ form.avatar }}
+                </div>
 
                 <!-- Botón para enviar los cambios -->
                 <div class="flex justify-between mt-6">
@@ -64,9 +62,9 @@
                     </button>
 
                     <div class="flex justify-center">
-                        <a href="javascript:history.back()" 
+                        <a href="{% url 'user:user_profile' %}"
                            class="px-3 py-2 text-sm font-medium text-center justify-between gap-2 inline-flex items-center text-white bg-blue-900 rounded-lg hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-800 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                             Volver
+                             Cancelar
                          </a>
                     </div>
                 </div>

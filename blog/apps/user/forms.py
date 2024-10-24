@@ -43,5 +43,10 @@ class UpdateUserForm(forms.ModelForm):
         model = User
         fields = ['first_name', 'last_name', 'email', 'avatar'] 
        
-    
+    def __init__(self, *args, **kwargs):
+        super(UpdateUserForm, self).__init__(*args, **kwargs)
+        for field_name in ['first_name', 'last_name', 'email']:
+            self.fields[field_name].widget.attrs.update({
+                'class': 'border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 max-w-xs w-full h-10'
+            })
 

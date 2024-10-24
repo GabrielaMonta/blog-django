@@ -9,7 +9,7 @@
         {% include 'components/commons/header.html' %}
         <section class="grid gap-4 mx-auto">
             
-            <header class="container mx-auto py-10 px-4">
+            <header class="container mx-auto py-4 px-4">
                 <h1 class="text-4xl lg:text-5xl font-bold text-center mb-4 text-white font-bold uppercase">
                   {{ post.title }}
                 </h1>
@@ -17,10 +17,10 @@
                   {{ post.location }} | {{ post.creation_date.date }}
                 </p>
 
-                <div class="w-full lg:w-3/4 mx-auto mb-6">
-                     {% if active_images %}
+                <div class="w-full lg:w-4/5 mx-auto mb-6">
+                    {% if active_images %}
                         {% for image in active_images %}
-                            <img src="{{ image.image.url }}" alt="Portada del post" class="w-[1100px] h-[500px] object-cover rounded-lg aspect-[16/9]" />
+                            <img src="{{ image.image.url }}" alt="Portada del post" class="w-full h-auto max-h-[500px] object-contain rounded-lg aspect-[16/9]" />
                         {% endfor %}
                     {% endif %}
                 </div>
@@ -49,7 +49,7 @@
                 {% endif %}
 
             </header>
-            <main class="container mx-auto py-10 px-4 mt-8 gap-4">
+            <main class="container mx-auto py-4 px-4 mt-8 gap-4">
                 {% if post.comments.count > 0 %}
                     <h1 class="text-start text-xl lg:text-3xl mb-8 max-w-3xl mx-auto gap-2 font-slackey font-normal text-white">Comentarios</h1>
                     <ul>
@@ -136,29 +136,30 @@
                           </svg>
                           <span class="sr-only">Info</span>
                           <div>
-                            <span class="font-medium">No hay comentarios realizados</span>
+                            <span class="font-medium">No hay comentarios realizados, se el primero</span>
                           </div>
                         </div>
                     </aside>
                 {% endif %}
             </main>
-            <section class="my-8">
+            <section class="my-2">
                 {% if user.is_authenticated and comment.author or user.is_collaborator or user.is_admin%}
                     <h2 class="text-start text-xl lg:text-md mb-8 max-w-3xl mx-auto gap-2 font-onest font-normal text-white">Agregar comentario</h2>
                     {% include 'components/ui/cardAddComment.html' with comment=add_comment_form.content%}
                 {% else %}
-                    <div class="grid place-items-center gap-4 text-sm font-onest text-slate-300">
-                        <header>
-                            <p>
-                                ¿Quieres contarnos tu experiencia?
-                            </p>
-                            <p>
-                                Accede a tu cuenta para realizar tu comentario
-                            </p>
-                        </header>
-                        <a href="{% url 'user:auth_login' %}?next={{ request.path }}" class="hover:text-blue-500 underline text-2xl font-bold text-white">
-                            Iniciar sesión
-                        </a>
+                <div class="flex flex-col items-center justify-center gap-4 text-sm font-onest text-slate-300">
+                    <header class="text-center">
+                        <p class="text-xl md:text-2xl lg:text-3xl">
+                            ¿Quieres contarnos tu experiencia?
+                        </p>
+                        <p class="text-[18px] ">
+                            Accede a tu cuenta para realizar tu comentario
+                        </p>
+                    </header>
+                    <a href="{% url 'user:auth_login' %}?next={{ request.path }}" class="hover:text-blue-500 underline text-2xl font-bold text-white">
+                        Iniciar sesión
+                    </a>
+                </div>
                     </div>
                 {% endif %}
             </section>

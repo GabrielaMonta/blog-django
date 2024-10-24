@@ -9,7 +9,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-16">
         {% if posts %}
              {% for post in posts %}
-                 {% include 'components/ui/card.html' with title=post.title images=post.images.all location=post.location date=post.creation_date.date allow_comments=post.allow_comments|yesno:"Si,No" author=post.author.username %}
+                 {% include 'components/ui/card.html' with title=post.title images=post.images.all location=post.location date=post.creation_date.date allow_comments=post.allow_comments|yesno:"Si,No" author=post.author.username comments_count=post.comments.count %}
              {% endfor %}
         {% else %}
             <div class="flex w-[300px] h-[50px] justify-center items-center p-4 text-md text-gray-800 rounded-lg  dark:text-gray-300" role="alert">

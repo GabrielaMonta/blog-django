@@ -19,7 +19,7 @@
             <main class="grid lg:grid-cols-3 sm:grid-cols-1 sm:place-items-center gap-4 my-8">
                 {% if latest_post %}
                      {% for post in latest_post %}
-                         {% include 'components/ui/card.html' with title=post.title images=post.images.all location=post.location date=post.creation_date.date allow_comments=post.allow_comments|yesno:"Si,No" author=post.author.username %}
+                         {% include 'components/ui/card.html' with title=post.title images=post.images.all location=post.location date=post.creation_date.date allow_comments=post.allow_comments|yesno:"Si,No" author=post.author.username comments_count=post.comments.count%}
                      {% endfor %}
                 {% endif %}
             </main>

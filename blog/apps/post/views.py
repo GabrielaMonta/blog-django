@@ -17,11 +17,14 @@ class PostListView(ListView):
         order_by = self.request.GET.get('order_by')
         location_id = self.request.GET.get('location')
         category_id = self.request.GET.get('category')
+        query = self.request.GET.get('query')
 
         if location_id:
             queryset = queryset.filter(location_id=location_id)
         if category_id:
             queryset = queryset.filter(category_id=category_id)
+        if query:  # Si se ingresa un término de búsqueda
+            queryset = queryset.filter(title__icontains=query)
 
         if order_by:
             queryset = queryset.order_by(order_by)

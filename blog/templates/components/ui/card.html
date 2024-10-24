@@ -21,9 +21,24 @@
     </div>
 
     <div class="px-4 py-2 text-gray-500 flex justify-between text-sm">
-        <p>Comentarios {{ allow_comments }}</p>
+        {% if comments_count > 1 %}
+            <p>{{ comments_count }} comentarios</p>
+        {% elif comments_count == 1 %}
+            <p>{{ comments_count }} comentario</p>
+        {% else %}
+            <p>No hay comentarios</p>
+        {% endif %}
+{#        <p>Comentar: {{ allow_comments }}</p>#}
         <p class="text-sm text-teal-600">@{{ author }}</p>
     </div>
+{#    <div class="px-4 py-2 text-gray-500 flex justify-between text-sm">#}
+{#        {% if comments_count > 0 %}#}
+{#            <p>{{ comments_count }} comentarios</p>#}
+{#        {% else %}#}
+{#            <p>No hay comentarios</p>#}
+{#        {% endif %} #}
+{#    </div>#}
+
 
     <div class="flex justify-end items-center gap-2 mt-2">
         {% if post.slug %}

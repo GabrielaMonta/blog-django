@@ -7,6 +7,7 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['latest_post'] = Post.objects.all().order_by('-creation_date')[:3]
+        context['count_comments'] = Post.objects.all().count()
         return context
 
 

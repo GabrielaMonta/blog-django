@@ -1,8 +1,8 @@
 
-# FECH
-## Proyecto desarrollado en python
+# FeCh - Informatorio 2024
 ## Descripcion
-Este proyecto es un blog dedicado a la promoción y difusión de eventos provinciales en el Chaco, Argentina. Su objetivo principal es servir como una plataforma informativa y accesible donde los usuarios pueden descubrir, compartir y participar en diversas actividades culturales, recreativas y educativas que se llevan a cabo en la provincia.
+Esta es la propuesta de proyecto final desarrollado en la segunda etapa del Informatorio 2024 (Resistencia - Chaco). 
+FeCh (Festivales Chaqueños) es un blog dedicado a la promoción y difusión de festivales y eventos en toda la extension del Chaco, Argentina. Su objetivo principal es servir como una plataforma informativa y accesible donde los usuarios pueden descubrir, compartir y participar en diversas actividades culturales, recreativas y educativas que se llevan a cabo en la provincia.
 
 ## Objetivo
 El blog busca promover la cultura y las actividades sociales en el Chaco, incentivando la participación de la comunidad en eventos que enriquecen la vida provincial. Al ser una plataforma accesible y fácil de usar, pretende conectar a los ciudadanos con las iniciativas locales, fomentar el turismo interno y fortalecer el tejido social de la región.

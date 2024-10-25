@@ -21,7 +21,6 @@
     </div>
 {% endblock extra_field %}
 
-<!-- Botón de registro, ahora dentro del formulario -->
 <div class="flex justify-end mt-4">
     <button type="submit" 
             class="py-2.5 px-5 me-2 mb-2 text-lg font-onest font-medium text-white bg-[#03346E] rounded-full hover:bg-[#03346E] focus:outline-none focus:ring-4 focus:ring-[#03346E]">
@@ -37,4 +36,48 @@
         ¿Ya tienes una cuenta? <span class="font-semibold underline hover:text-[#03346E]">Inicia sesión</span>
     </a>
 </div>
+<div class="flex justify-center mt-4">
+    <a href="{% url 'user:auth_login' %}" 
+       class="text-lg font-onest text-white underline hover:font-semibold">
+        Volver
+    </a>
+</div>
 {% endblock name_a %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var form = document.querySelector('form');
+        form.onsubmit = function(event) {
+            var username = document.getElementById("id_username").value.trim();
+            var password1 = document.getElementById("id_password1").value.trim();
+            var password2 = document.getElementById("id_password2").value.trim();
+
+            // Verificación de campos vacíos
+            if (username === "" || password1 === "" || password2 === "") {
+                alert("Por favor, completa todos los campos.");
+                event.preventDefault();
+                return false;
+            }
+
+            // Verificación de contraseñas coincidentes
+            if (password1 !== password2) {
+                alert("Las contraseñas no coinciden.");
+                event.preventDefault();
+                return false;
+            }
+        };
+
+        // Mostrar/ocultar contraseñas al hacer clic en el campo (sin cambiar la estructura)
+        var passwordFields = [document.getElementById("id_password1"), document.getElementById("id_password2")];
+        passwordFields.forEach(function(field) {
+            if (field) {
+                field.addEventListener('focus', function() {
+                    field.type = 'text';
+                });
+                field.addEventListener('blur', function() {
+                    field.type = 'password';
+                });
+            }
+        });
+    });
+</script>

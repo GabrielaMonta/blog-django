@@ -13,21 +13,16 @@
     <img src={% static 'media/user/auth_login.png' %} alt="Imagen de ejemplo" class="object-cover rounded-t-lg md:rounded-l-lg h-full w-full " />
 {% endblock url_img%}
 
-//añadir para los campos -- borrar esta linea
 {% block form_fields %}
-
     <div class="mb-4">
         <label for="{{ form.username.id_for_label }}" class="block text-md font-medium text-white">Nombre de usuario</label>
         {{ form.username }}
     </div>
-
-   
     <div class="mb-4">
         <label for="{{ form.password.id_for_label }}" class="block text-md font-medium text-white">Contraseña</label>
         {{ form.password }}
     </div>
 {% endblock form_fields %}
-//borrar esta tmb
 
 <div class="flex justify-end mt-4">
     <button type="submit" 
@@ -45,4 +40,11 @@
             <span class="font-semibold underline hover:text-[#03346E]">Regístrate</span> <!-- Cambia el color al pasar el mouse -->
         </a>
     </div>
+
+<div class="flex justify-center mt-4">
+    <a href="{% url 'home' %}" 
+       class="text-lg font-onest text-white underline hover:font-semibold">
+        Volver
+    </a>
+</div>
 {% endblock name_a %}

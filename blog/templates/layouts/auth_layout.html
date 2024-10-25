@@ -41,34 +41,55 @@
                     </button>
                 </div>
                 {% block name_a %} {% endblock name_a %}
-                <div class="flex justify-center mt-4">
-                    <a href="javascript:history.back()" 
-                       class="text-lg font-onest text-white underline hover:font-semibold">
-                        Volver
-                    </a>
-                </div>
-
             </form>
         </div>
     </div>
 </main>
 
+<!-- Script para manejar la validación y mostrar/ocultar contraseña -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var form = document.querySelector('form');
 
-        form.onsubmit = function(event) {
-            var username = document.getElementById("id_username").value.trim();
-            var password = document.getElementById("id_password1").value.trim();
+        if (form) {
+            form.onsubmit = function(event) {
+                var username = document.getElementById("id_username") ? document.getElementById("id_username").value.trim() : "";
+                var password1 = document.getElementById("id_password1") ? document.getElementById("id_password1").value.trim() : "";
+                var password2 = document.getElementById("id_password2") ? document.getElementById("id_password2").value.trim() : "";
 
-            if (username === "" || password === "") {
-                alert("Por favor, completa todos los campos.");
-                event.preventDefault();
-                return false;
-            }
+                // Verificación de campos vacíos
+                if (!username || !password1 || !password2) {
+                    alert("Por favor, completa todos los campos.");
+                    event.preventDefault();
+                    return false;
+                }
 
-            return true;
-        };
+                // Verificación de contraseñas coincidentes
+                if (password1 !== password2) {
+                    alert("Las contraseñas no coinciden.");
+                    event.preventDefault();
+                    return false;
+                }
+
+                return true;
+            };
+
+            // Mostrar/ocultar contraseñas temporalmente mientras se escribe
+            var passwordFields = [document.getElementById("id_password1"), document.getElementById("id_password2")];
+            passwordFields.forEach(function(field) {
+                if (field) {
+                    field.addEventListener('input', function() {
+                        field.type = 'text';
+
+                        // Ocultar la contraseña después de 2 segundos
+                        setTimeout(function() {
+                            field.type = 'password';
+                        }, 2000);
+                    });
+                }
+            });
+        }
     });
 </script>
+
 {% endblock content_layout %}

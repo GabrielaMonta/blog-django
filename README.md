@@ -9,6 +9,8 @@ El blog busca promover la cultura y las actividades sociales en el Chaco, incent
 
 ## Deploy link
 
+## Imagen de la pag
+
 ## Estructura del proyecto
 ESTRUCTURA DEL PROYECTO
 
@@ -116,6 +118,6 @@ ESTRUCTURA DEL PROYECTO
 ```
 
 ## Desarrolladores
-JUDKEVICH, Natasha                email: njudkevich@gmail.com
-MONTANARO, Gabriela Antonella     email: gabrielaam201@gmail.com
-PAEZ, Benjamin                    email:
+- JUDKEVICH, Natasha                email: njudkevich@gmail.com
+- MONTANARO, Gabriela Antonella     email: gabrielaam201@gmail.com
+- PAEZ, Benjamin                    email:

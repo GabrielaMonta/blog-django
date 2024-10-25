@@ -120,6 +120,6 @@ ESTRUCTURA DEL PROYECTO
 ```
 
 ## Desarrolladores
-- JUDKEVICH, Natasha                email: njudkevich@gmail.com
-- MONTANARO, Gabriela Antonella     email: gabrielaam201@gmail.com
-- PAEZ, Benjamin                    email:
+- JUDKEVICH, Natasha --                email: njudkevich@gmail.com
+- MONTANARO, Gabriela Antonella --    email: gabrielaam201@gmail.com
+- PAEZ, Benjamin  --                  email:

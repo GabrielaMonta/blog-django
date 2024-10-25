@@ -22,12 +22,19 @@
                 <!-- Los campos del formulario de login-->
                 <div class="mb-4">
                     <label for="{{ form.username.id_for_label }}" class="block text-md font-medium text-white">Nombre de usuario</label>
-                    {{ form.username }}  <!-- Campo de nombre de usuario -->
+                    {{ form.username }}   
+                    <div class="text-red-600 text-sm">
+                        {{ form.username.errors }}
+                    </div>
+                  
                 </div>
 
                 <div class="mb-4">
                     <label for="{{ form.password1.id_for_label }}" class="block text-md font-medium text-white">Contraseña</label>
-                    {{ form.password1 }}  <!-- Campo de contraseña -->
+                    {{ form.password1 }}
+                    <div class="text-red-600 text-sm">
+                        {{ form.password1.errors }}
+                    </div>
                 </div>
 
                 {% block extra_field %} {% endblock extra_field %}
@@ -45,46 +52,5 @@
         </div>
     </div>
 </main>
-
-<!-- Script para manejar la validación y mostrar/ocultar contraseña -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var form = document.querySelector('form');
-
-        if (form) {
-            form.onsubmit = function(event) {
-                var username = document.getElementById("id_username") ? document.getElementById("id_username").value.trim() : "";
-                var password1 = document.getElementById("id_password1") ? document.getElementById("id_password1").value.trim() : "";
-                var password2 = document.getElementById("id_password2") ? document.getElementById("id_password2").value.trim() : "";
-
-
-
-                // Verificación de contraseñas coincidentes
-                if (password1 !== password2) {
-                    alert("Las contraseñas no coinciden.");
-                    event.preventDefault();
-                    return false;
-                }
-
-                return true;
-            };
-
-            // Mostrar/ocultar contraseñas temporalmente mientras se escribe
-            var passwordFields = [document.getElementById("id_password1"), document.getElementById("id_password2")];
-            passwordFields.forEach(function(field) {
-                if (field) {
-                    field.addEventListener('input', function() {
-                        field.type = 'text';
-
-                        // Ocultar la contraseña después de 2 segundos
-                        setTimeout(function() {
-                            field.type = 'password';
-                        }, 2000);
-                    });
-                }
-            });
-        }
-    });
-</script>
 
 {% endblock content_layout %}

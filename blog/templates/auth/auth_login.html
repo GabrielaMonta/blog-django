@@ -17,10 +17,17 @@
     <div class="mb-4">
         <label for="{{ form.username.id_for_label }}" class="block text-md font-medium text-white">Nombre de usuario</label>
         {{ form.username }}
+        <div class="text-red-600 text-sm"">
+            {{ form.username.errors }}
+        </div>
+        
     </div>
     <div class="mb-4">
         <label for="{{ form.password.id_for_label }}" class="block text-md font-medium text-white">Contraseña</label>
         {{ form.password }}
+        <div class="text-red-600 text-sm">
+            {{ form.password.errors }}
+        </div>
     </div>
 {% endblock form_fields %}
 

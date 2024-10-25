@@ -31,7 +31,7 @@
         const mobileMenu = document.getElementById('mobile-menu');
         const desktopMenu = document.getElementById('desktop-menu');
         const hamburger = document.getElementById('hamburger');
-    
+
         if (isMobile) {
           hamburger.classList.remove('hidden');
           desktopMenu.classList.add('hidden');
@@ -45,14 +45,14 @@
 
       function handleHamburgerClick() {
         const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenu.classList.toggle('hidden'); 
+        mobileMenu.classList.toggle('hidden');
       }
 
       function initMenu() {
         const hamburger = document.getElementById('hamburger');
-          
+
         hamburger.addEventListener('click', handleHamburgerClick);
-          
+
         window.addEventListener('resize', checkWindowSize);
 
         checkWindowSize();

@@ -1,5 +1,6 @@
-## FeCh
-# Proyecto desarrollado en python
+
+# FECH
+## Proyecto desarrollado en python
 ## Descripcion
 Este proyecto es un blog dedicado a la promoción y difusión de eventos provinciales en el Chaco, Argentina. Su objetivo principal es servir como una plataforma informativa y accesible donde los usuarios pueden descubrir, compartir y participar en diversas actividades culturales, recreativas y educativas que se llevan a cabo en la provincia.
 

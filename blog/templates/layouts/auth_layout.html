@@ -57,12 +57,7 @@
                 var password1 = document.getElementById("id_password1") ? document.getElementById("id_password1").value.trim() : "";
                 var password2 = document.getElementById("id_password2") ? document.getElementById("id_password2").value.trim() : "";
 
-                // Verificación de campos vacíos
-                if (!username || !password1 || !password2) {
-                    alert("Por favor, completa todos los campos.");
-                    event.preventDefault();
-                    return false;
-                }
+
 
                 // Verificación de contraseñas coincidentes
                 if (password1 !== password2) {

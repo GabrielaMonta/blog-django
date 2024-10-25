@@ -2,7 +2,7 @@
 <article class="max-w-sm bg-gray-100 w-[320px] rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 overflow-hidden font-onest p-2">
 
     <div class="p-2">
-        <h2 class="font-slackey text-[#ffad60] uppercase">{{ title }}</h2>
+        <h2 class="font-bold text-[#ffad60] uppercase" style="font-weight: 700; font-size: 1.5rem;">{{ title }}</h2>
     </div>
 
 
@@ -23,11 +23,11 @@
                         </div>
                     {% endfor %}
                 </div>
-    
-                <button id="prev" class="absolute top-1/2 left-0 z-10 p-2 text-white bg-black rounded-full transform -translate-y-1/2 hover:bg-gray-700">
+              
+                <button id="prev" class="absolute top-1/2 left-0 transform -translate-y-1/2 text-white text-1xl px-2 py-1 bg-transparent">
                     &#10094;
                 </button>
-                <button id="next" class="absolute top-1/2 right-0 z-10 p-2 text-white bg-black rounded-full transform -translate-y-1/2 hover:bg-gray-700">
+                <button id="next" class="absolute top-1/2 right-0 transform -translate-y-1/2 text-white text-1xl px-2 py-1 bg-transparent">
                     &#10095;
                 </button>
             {% endif %}
@@ -36,7 +36,7 @@
     
     <script>
         let currentSlide = 1;
-        const totalSlides = {{ images|length }};
+        const totalSlides = {{ images|length }}; ; 
         
         // Solo ejecutar el carrusel si hay más de una imagen
         if (totalSlides > 1) {
@@ -70,6 +70,8 @@
     
         // Listener para reiniciar el carrusel después de agregar una nueva imagen
         document.addEventListener('DOMContentLoaded', resetCarousel);
+
+      
     </script>
       <!-- Aca termina mi carrucel  -->
 

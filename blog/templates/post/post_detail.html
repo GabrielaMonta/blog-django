@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content_layout %}
-    <div class="grid grid-rows-[96px_1fr_56px] min-h-screen">
+    <div class="grid grid-rows-[96px_1fr_56px] min-h-screen"> 
         {% include 'components/commons/header.html' %}
         <section class="grid gap-4 mx-auto">
             <header class="container mx-auto py-10 px-4 bg-[#40534C] rounded-xl my-8 shadow-lg">
@@ -17,12 +17,67 @@
                 </p>
 
                 <div class="w-full lg:w-3/4 mx-auto mb-6 shadow-2xl">
-                    {% if active_images %}
-                        {% for image in active_images %}
-                            <img src="{{ image.image.url }}" alt="Portada del post" class="w-[1100px] h-[500px] object-cover rounded-lg aspect-[16/9]" />
-                        {% endfor %}
+                    {% if active_images|length == 1 %}
+                        <!-- Mostrar solo una imagen si hay una sola -->
+                        <img src="{{ active_images.0.image.url }}" alt="Imagen del post" class="w-[1100px] h-[500px] object-cover rounded-lg aspect-[16/9]" />
+                    {% else %}
+                        <!-- Carrusel de imágenes si hay más de una -->
+                        <div class="relative overflow-hidden">
+                            <div class="flex transition-transform duration-700 ease-in-out" id="carousel-images">
+                                {% for image in active_images %}
+                                    <div class="flex-none w-full">
+                                        <img src="{{ image.image.url }}" alt="Imagen del post" class="w-[1100px] h-[500px] object-cover rounded-lg aspect-[16/9]" />
+                                    </div>
+                                {% endfor %}
+                            </div>
+                
+                            <!-- Botones de navegación -->
+                            <button class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-transparent text-white text-5xl px-2 py-1" onclick="previousSlide()">‹</button>
+                            <button class="absolute top-1/2 right-0 transform -translate-y-1/2bg-transparent text-white text-5xl px-2 py-1" onclick="nextSlide()">›</button>
+                        </div>
+                
+                        <!-- Indicadores (opcional) -->
+                        <div class="flex justify-center space-x-2 mt-4">
+                            {% for image in active_images %}
+                                <button onclick="goToSlide({{ forloop.counter }})" class="w-3 h-3 bg-gray-400 rounded-full"></button>
+                            {% endfor %}
+                        </div>
                     {% endif %}
                 </div>
+                
+                <script>
+                    let currentSlide = 0;
+                    const totalSlides = {{ active_images|length }};
+                    const carousel = document.getElementById('carousel-images');
+                
+                    function showSlide(index) {
+                        if (index >= totalSlides) {
+                            currentSlide = 0;
+                        } else if (index < 0) {
+                            currentSlide = totalSlides - 1;
+                        } else {
+                            currentSlide = index;
+                        }
+                        const offset = -currentSlide * 100;
+                        carousel.style.transform = `translateX(${offset}%)`;
+                    }
+                
+                    function nextSlide() {
+                        showSlide(currentSlide + 1);
+                    }
+                
+                    function previousSlide() {
+                        showSlide(currentSlide - 1);
+                    }
+                
+                    function goToSlide(index) {
+                        showSlide(index - 1);
+                    }
+                
+                    // Carrusel automático (opcional)
+                    setInterval(nextSlide, 3000);  // Cambiar de imagen cada 3 segundos
+                </script>
+                
 
                 <section class="text-start text-lg lg:text-xl my-8 max-w-3xl mx-auto gap-2 font-onest font-normal text-gray-300">
                     <p>

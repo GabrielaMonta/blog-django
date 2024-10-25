@@ -24,7 +24,7 @@
                 <aside class="grid col-span-1 gap-4">
                     <div class="grid">
                         <header class="text-center">
-                            <h1 class="uppercase text-3xl font-bold text-white">Redes sociales</h1>
+                            <h1 class="uppercase text-3xl font-normal text-white font-slackey">Redes sociales</h1>
                             <p class="text-base font-light text-gray-200 mt-4">¡No te pierdas nada! Síguenos en nuestras plataformas y entérate de las sorpresas, novedades exclusivas y mucho más.</p>
                         </header>
                         <div class="flex flex-wrap justify-center gap-8 mt-6">
@@ -51,25 +51,25 @@
                     </div>
                     <div class="grid mt-8">
                         <header class="text-center"> 
-                            <h1 class="uppercase text-3xl font-bold text-white">Desarrolladores</h1>
+                            <h1 class="uppercase text-3xl font-normal text-white font-slackey">Desarrolladores</h1>
                             <p class="text-base font-light text-gray-200 mt-4">Para consultas técnicas o relacionadas con el desarrollo de la página</p>
                         </header>
                         <div class="flex flex-wrap justify-center gap-4"> 
-                            <a href="mailto:benjamineliaspaez@gmail.com" class="w-64"> <!-- Enlace para el correo de Benjamin -->
+                            <a href="mailto:benjamineliaspaez@gmail.com" class="w-64">
                                 {% include 'components/ui/developCard.html' with name="Benjamin" email="benjamineliaspaez@gmail.com" %}
                             </a>
-                            <a href="mailto:gabrielaam201@gmail.com" class="w-64"> <!-- Enlace para el correo de Gabriela -->
+                            <a href="mailto:gabrielaam201@gmail.com" class="w-64">
                                 {% include 'components/ui/developCard.html' with name="Gabriela" email="gabrielaam201@gmail.com" %}
                             </a>
-                            <a href="mailto:njudkevich@gmail.com" class="w-64"> <!-- Enlace para el correo de Natasha -->
+                            <a href="mailto:njudkevich@gmail.com" class="w-64">
                                 {% include 'components/ui/developCard.html' with name="Natasha" email="njudkevich@gmail.com" %}
                             </a>
                         </div>
                     </div>
                 </aside>
                 <section class="grid col-span-1 px-8 max-w-2xl sm:max-w-xl">
-                    <div class="grid bg-gray-100 rounded-lg border border-gray-300 shadow-md gap-4 py-6">
-                        <h1 class="grid place-items-center text-center text-xl font-onest font-bold text-[#386264] mb-4">FORMULARIO DE CONTACTO</h1>
+                    <div class="grid bg-[#1f2937] rounded-lg border border-gray-300 shadow-md gap-4 py-6">
+                        <h1 class="grid place-items-center text-center text-xl font-onest font-bold text-[#ffad60] mb-4">FORMULARIO DE CONTACTO</h1>
                         <hr class="border-t border-gray-300 mb-4">
                         <form class="max-w-md mx-auto font-onest" method="POST"> {% csrf_token %}
                             <div class="mb-5">

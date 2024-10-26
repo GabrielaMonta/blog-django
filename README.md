@@ -8,10 +8,10 @@ FeCh (Festivales Chaqueños) es un blog dedicado a la promoción y difusión de 
 El blog busca promover la cultura y las actividades sociales en el Chaco, incentivando la participación de la comunidad en eventos que enriquecen la vida provincial. Al ser una plataforma accesible y fácil de usar, pretende conectar a los ciudadanos con las iniciativas locales, fomentar el turismo interno y fortalecer el tejido social de la región.
 
 ## Idea Original del proyecto
+https://drive.google.com/drive/u/4/folders/1QO9CoN6eD1qscVi0jfoPjp1l8_m6_PWz?authuser=0
 
 ## Deploy link
-
-## Imagen de la pag
+https://benjaminpaez.pythonanywhere.com/
 
 ## Estructura del proyecto
 ESTRUCTURA DEL PROYECTO

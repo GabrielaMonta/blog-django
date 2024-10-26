@@ -32,9 +32,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
 
     'apps.post',
     'apps.user',
+    'apps.contactus',
 ]
 
 AUTH_USER_MODEL = 'user.User'
@@ -121,3 +123,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DEFAULT_POST_IMAGE = 'post/default/post_default.png'
+

@@ -26,6 +26,7 @@ urlpatterns = [
     path('users/', include('apps.user.urls', namespace='user')),
     path('section/about/', AboutView.as_view(), name='section_about'),
     path('section/contact/', ContactView.as_view(), name='section_contact'),
+    path('contactuss/', include('apps.contactus.urls', namespace='contactus')),
 ]
 
 if settings.DEBUG:

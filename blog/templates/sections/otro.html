@@ -1,0 +1,73 @@
+{% extends 'layouts/main_layout.html' %}
+{% block title_layout %}
+    {% block title %}FeCH | Acerca de{% endblock %}
+{% endblock %}
+
+{% block content_layout %}
+    {% include 'components/commons/header.html' %}
+    <main class="flex justify-center min-h-[calc(100vh-152px)] m-4">
+        <article class="grid">
+            <section class="grid col-span-1 px-4 max-w-5xl w-full sm:max-w-6xl">
+                <div class="bg-gray-100 rounded-lg border border-gray-300 shadow-md p-8">
+                    <h1 class="text-center text-2xl font-onest font-bold text-[#386264] mb-6">FORMULARIO DE CONTACTO</h1>
+                    <hr class="border-t border-gray-300 mb-6">
+                
+                    <!-- Mostrar mensajes de éxito -->
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-success text-center text-green-700 font-bold mb-4">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                
+                    <form method="post">
+                        {% csrf_token %}
+                        <fieldset>
+                            <legend class="text-center font-bold text-xl mb-4">Contáctanos</legend>
+                
+                            <div class="form-group mb-4">
+                                <label for="Nombre" class="block text-gray-700 font-semibold mb-2">Nombre</label>
+                                {{ form.name_contact }}
+                            </div>
+                
+                            <div class="form-group mb-4">
+                                <label for="Correo electrónico" class="block text-gray-700 font-semibold mb-2">Correo Electrónico</label>
+                                {{ form.email_contact }}
+                            </div>
+                
+                            <div class="form-group mb-4">
+                                <label for="Razón" class="block text-gray-700 font-semibold mb-2">Razón</label>
+                                {{ form.subject }}
+                            </div>
+                
+                            <div class="form-group mb-4">
+                                <label for="Mensaje" class="block text-gray-700 font-semibold mb-2">Mensaje</label>
+                                {{ form.message }}
+                            </div>
+                
+                            <!-- Mostrar errores de validación -->
+                            {% if form.errors %}
+                                <div class="alert alert-danger text-red-700 font-semibold mb-4">
+                                    {% for field, errors in form.errors.items %}
+                                        {% for error in errors %}
+                                            <p>{{ error }}</p>
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                
+                            <div class="form-group">
+                                <div class="flex justify-center">
+                                    <button type="submit" class="py-2.5 px-5 text-lg font-onest font-medium text-white bg-[#03346E] rounded-full border border-gray-200 hover:bg-[#02508B] focus:outline-none focus:ring-4 focus:ring-[#03346E]">
+                                        Enviar
+                                    </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    {% include 'components/commons/footer.html' %}
+{% endblock %}
